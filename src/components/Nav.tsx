@@ -1,0 +1,65 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const links = [
+  { href: "/privacy", label: "Privacy" },
+  { href: "/terms", label: "Terms" },
+  { href: "/support", label: "Support" },
+] as const;
+
+export default function Nav() {
+  const pathname = usePathname();
+
+  return (
+    <nav
+      className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/92 backdrop-blur-xl"
+      aria-label="Main"
+    >
+      <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
+        <Link href="/" className="flex items-center gap-3">
+          <div className="flex size-[30px] shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-fire to-law">
+            <svg
+              viewBox="0 0 24 24"
+              className="h-4 w-4"
+              fill="none"
+              stroke="white"
+              strokeWidth={2.5}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden
+            >
+              <path d="M2 12h4l3-9 4 18 3-9h4" />
+            </svg>
+          </div>
+          <span className="text-[17px] font-bold text-textPrimary tracking-tight">
+            ToneOut
+          </span>
+        </Link>
+
+        <div className="flex items-center gap-1.5">
+          {links.map((link) => {
+            const isActive = pathname === link.href;
+
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={isActive ? "page" : undefined}
+                className={[
+                  "rounded-md border px-3 py-1.5 text-xs font-semibold transition-colors",
+                  isActive
+                    ? "border-borderBright bg-borderBright text-textSecondary"
+                    : "border-transparent bg-transparent text-textMuted",
+                ].join(" ")}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+    </nav>
+  );
+}
