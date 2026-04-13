@@ -3,8 +3,8 @@ const LOGO_ROW = `
   <td align="center" style="padding:0 0 36px;">
     <table cellpadding="0" cellspacing="0" role="presentation">
       <tr>
-        <td style="width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#bf5a3a 0%,#4878a8 100%);text-align:center;vertical-align:middle;line-height:34px;">
-          <span style="font-size:16px;color:#ffffff;">&#9836;</span>
+        <td style="width:34px;height:34px;">
+          <img src="https://toneout.app/icon-192.png" alt="ToneOut" width="34" height="34" style="display:block;border-radius:9px;" />
         </td>
         <td style="padding-left:10px;font-size:18px;font-weight:700;color:#e4e5ed;letter-spacing:-0.5px;">
           ToneOut
