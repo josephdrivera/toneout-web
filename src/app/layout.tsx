@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { ClerkProvider } from "@clerk/nextjs";
+import Nav from "../components/Nav";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -24,9 +24,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col font-sans">
-        <ClerkProvider>{children}</ClerkProvider>
+    <html lang="en" className="dark">
+      <body className="bg-background text-textSecondary antialiased font-sans">
+        <Nav />
+        {children}
       </body>
     </html>
   );

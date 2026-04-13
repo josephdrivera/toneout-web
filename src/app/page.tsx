@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Nav from "../components/Nav";
 import WaitlistForm from "../components/WaitlistForm";
 
 const features = [
@@ -68,6 +67,8 @@ const features = [
     iconBg: "bg-[#5a7a8a]/10 text-[#5a7a8a]",
     title: "Background Audio",
     desc: "Keep listening while using other apps. Lock Screen and Control Center playback.",
+    pro: true,
+    comingSoon: true,
   },
   {
     paths: (
@@ -128,9 +129,7 @@ const roadmapItems = [
 
 export default function Home() {
   return (
-    <>
-      <Nav />
-      <main className="relative bg-background pt-20 text-center text-textSecondary">
+    <main className="relative bg-background pt-20 text-center text-textSecondary">
         {/* Radial glow */}
         <div
           className="pointer-events-none absolute left-1/2 top-[60px] size-[500px] -translate-x-1/2 rounded-full opacity-[0.05] [background:radial-gradient(circle,#4878a8_0%,transparent_70%)]"
@@ -408,6 +407,5 @@ export default function Home() {
           </p>
         </footer>
       </main>
-    </>
   );
 }

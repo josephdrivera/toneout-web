@@ -7,7 +7,7 @@ export default function WaitlistForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
   const [error, setError] = useState("");
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!email || !email.includes("@") || !email.includes(".")) {
       setError("Please enter a valid email address.");
@@ -15,7 +15,27 @@ export default function WaitlistForm() {
     }
     setError("");
     setStatus("loading");
-    setTimeout(() => setStatus("success"), 700);
+
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error ?? "Something went wrong. Please try again.");
+        setStatus("idle");
+        return;
+      }
+
+      setStatus("success");
+    } catch {
+      setError("Network error. Please try again.");
+      setStatus("idle");
+    }
   }
 
   if (status === "success") {

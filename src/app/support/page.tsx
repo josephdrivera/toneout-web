@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Nav from "../../components/Nav";
 
 export const metadata: Metadata = {
   title: "Support — ToneOut",
@@ -26,9 +25,7 @@ function Q({ children }: { children: React.ReactNode }) {
 
 export default function Support() {
   return (
-    <>
-      <Nav />
-      <main className="bg-background pt-20">
+    <main className="bg-background pt-20">
         <div className="mx-auto max-w-2xl px-6 pb-16 pt-10">
           <Link
             href="/"
@@ -162,7 +159,6 @@ export default function Support() {
             </P>
           </div>
         </div>
-      </main>
-    </>
+    </main>
   );
 }

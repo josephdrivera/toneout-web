@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Nav from "../../components/Nav";
 
 export const metadata: Metadata = {
   title: "Privacy Policy — ToneOut",
@@ -24,9 +23,7 @@ function B({ children }: { children: React.ReactNode }) {
 
 export default function PrivacyPolicy() {
   return (
-    <>
-      <Nav />
-      <main className="bg-background pt-20">
+    <main className="bg-background pt-20">
         <div className="mx-auto max-w-2xl px-6 pb-16 pt-10">
           <Link
             href="/"
@@ -165,7 +162,6 @@ export default function PrivacyPolicy() {
             </P>
           </div>
         </div>
-      </main>
-    </>
+    </main>
   );
 }
