@@ -12,6 +12,10 @@ export const metadata: Metadata = {
       "Ad-free police, fire & EMS scanner app with Dual Listen and Push to Talk. Built by a firefighter. iOS.",
     siteName: "ToneOut",
   },
+  icons: {
+    icon: "/icon-192.png",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export const viewport: Viewport = {
