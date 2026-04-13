@@ -20,15 +20,15 @@ const FOOTER = `
     <table cellpadding="0" cellspacing="0" role="presentation" style="margin:0 auto;">
       <tr>
         <td style="padding:0 10px;">
-          <a href="https://toneoutapp.com/privacy" style="font-size:11px;color:#3e3f50;text-decoration:none;">Privacy</a>
+          <a href="https://toneout.app/privacy" style="font-size:11px;color:#3e3f50;text-decoration:none;">Privacy</a>
         </td>
         <td style="font-size:11px;color:#222330;">&middot;</td>
         <td style="padding:0 10px;">
-          <a href="https://toneoutapp.com/terms" style="font-size:11px;color:#3e3f50;text-decoration:none;">Terms</a>
+          <a href="https://toneout.app/terms" style="font-size:11px;color:#3e3f50;text-decoration:none;">Terms</a>
         </td>
         <td style="font-size:11px;color:#222330;">&middot;</td>
         <td style="padding:0 10px;">
-          <a href="https://toneoutapp.com/support" style="font-size:11px;color:#3e3f50;text-decoration:none;">Support</a>
+          <a href="https://toneout.app/support" style="font-size:11px;color:#3e3f50;text-decoration:none;">Support</a>
         </td>
       </tr>
     </table>

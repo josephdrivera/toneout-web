@@ -143,7 +143,7 @@ export default function PrivacyPolicy() {
             <P>
               You may request deletion of your waitlist email at any time by
               contacting{" "}
-              <span className="text-accent">support@toneoutapp.com</span>. On-device
+              <span className="text-accent">support@toneout.app</span>. On-device
               data can be deleted by uninstalling the App.
             </P>
 
@@ -158,7 +158,7 @@ export default function PrivacyPolicy() {
 
             <P>
               Questions? Contact us at{" "}
-              <span className="text-accent">support@toneoutapp.com</span>
+              <span className="text-accent">support@toneout.app</span>
             </P>
           </div>
         </div>

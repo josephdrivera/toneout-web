@@ -146,7 +146,7 @@ export default function Support() {
 
             <P>
               For questions, feedback, or bug reports:{" "}
-              <span className="text-accent">support@toneoutapp.com</span>
+              <span className="text-accent">support@toneout.app</span>
             </P>
             <P>We respond within 48 hours.</P>
 

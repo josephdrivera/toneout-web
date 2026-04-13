@@ -171,7 +171,7 @@ export default function TermsOfUse() {
 
             <P>
               Questions?{" "}
-              <span className="text-accent">support@toneoutapp.com</span>
+              <span className="text-accent">support@toneout.app</span>
             </P>
           </div>
         </div>
