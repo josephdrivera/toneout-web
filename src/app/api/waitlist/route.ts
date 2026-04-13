@@ -62,31 +62,35 @@ export async function POST(request: Request) {
     const { alreadyJoined } = result;
 
     const resendKey = process.env.RESEND_API_KEY;
-    if (resendKey && !alreadyJoined) {
+    if (resendKey) {
       const resend = new Resend(resendKey);
       const fromAddress =
         process.env.RESEND_FROM_EMAIL ?? "ToneOut <onboarding@resend.dev>";
 
-      resend.emails
-        .send({
+      if (!alreadyJoined) {
+        const { error: confirmErr } = await resend.emails.send({
           from: fromAddress,
           to: email,
           subject: "You\u2019re on the ToneOut waitlist",
           html: buildWaitlistEmail(email),
-        })
-        .catch((err) => console.error("Confirmation email error:", err));
+        });
+        if (confirmErr) {
+          console.error("Confirmation email error:", confirmErr);
+        }
+      }
 
       const adminEmail = process.env.ADMIN_EMAIL;
       if (adminEmail) {
         const totalCount = await convex.query(api.waitlist.count, {});
-        resend.emails
-          .send({
-            from: fromAddress,
-            to: adminEmail,
-            subject: `New waitlist signup #${totalCount}: ${email}`,
-            html: buildAdminNotificationEmail(email, totalCount),
-          })
-          .catch((err) => console.error("Admin notification error:", err));
+        const { error: adminErr } = await resend.emails.send({
+          from: fromAddress,
+          to: adminEmail,
+          subject: `New waitlist signup #${totalCount}: ${email}`,
+          html: buildAdminNotificationEmail(email, totalCount),
+        });
+        if (adminErr) {
+          console.error("Admin notification error:", adminErr);
+        }
       }
 
       const audienceId = process.env.RESEND_AUDIENCE_ID;
