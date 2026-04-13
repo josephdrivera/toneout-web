@@ -4,7 +4,7 @@ import { FormEvent, useState } from "react";
 
 export default function WaitlistForm() {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "already">("idle");
   const [error, setError] = useState("");
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -31,11 +31,40 @@ export default function WaitlistForm() {
         return;
       }
 
-      setStatus("success");
+      setStatus(data.alreadyJoined ? "already" : "success");
     } catch {
       setError("Network error. Please try again.");
       setStatus("idle");
     }
+  }
+
+  if (status === "already") {
+    return (
+      <div className="mx-auto max-w-[440px] rounded-[14px] border border-accent/20 bg-surface px-8 py-7 text-center">
+        <div className="mx-auto mb-4 flex size-12 items-center justify-center rounded-xl bg-accent/10">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#4878a8"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            aria-hidden={true}
+          >
+            <circle cx="12" cy="12" r="10" strokeWidth="2" />
+            <path d="M12 8v4M12 16h.01" />
+          </svg>
+        </div>
+        <h3 className="mb-2 text-lg font-bold text-textPrimary">
+          You&apos;re already on the list
+        </h3>
+        <p className="text-[13px] leading-relaxed text-textBody">
+          We already have your email. We&apos;ll notify you when ToneOut
+          launches — no need to sign up again.
+        </p>
+      </div>
+    );
   }
 
   if (status === "success") {
