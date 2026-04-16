@@ -1,5 +1,6 @@
 import Link from "next/link";
 import WaitlistForm from "../components/WaitlistForm";
+import { updates } from "../data/updates";
 
 const features = [
   {
@@ -78,9 +79,9 @@ const features = [
       </>
     ),
     iconBg: "bg-law/10 text-law",
-    title: "Powered by RadioReference",
-    desc: "All live audio streams and feed data are provided by RadioReference.com — the world\u2019s largest radio communications database.",
-    link: "https://www.radioreference.com/",
+    title: "Powered by OpenMHz",
+    desc: "Live audio streams sourced from OpenMHz \u2014 an open-source platform for streaming and archiving public safety radio communications.",
+    link: "https://openmhz.com/",
   },
 ];
 
@@ -153,6 +154,47 @@ export default function Home() {
               <path d="M2 12h4l3-9 4 18 3-9h4" />
             </svg>
           </div>
+
+          {/* Update badge */}
+          {updates.length > 0 && (
+            <Link
+              href="/updates"
+              className="group mb-3 inline-flex items-center gap-2 rounded-full border border-accent/[0.15] bg-accent/[0.06] px-4 py-[6px] transition-all hover:border-accent/25 hover:bg-accent/10"
+            >
+              <span className="flex size-[18px] items-center justify-center rounded-full bg-accent/20">
+                <svg
+                  width="10"
+                  height="10"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#4878a8"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden
+                >
+                  <path d="M12 19V5M5 12l7-7 7 7" />
+                </svg>
+              </span>
+              <span className="text-[11px] font-bold tracking-[0.04em] text-accent">
+                Update: {updates[0].title}
+              </span>
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#4878a8"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="opacity-40 transition-transform group-hover:translate-x-0.5 group-hover:opacity-70"
+                aria-hidden
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </Link>
+          )}
 
           {/* Coming soon badge */}
           <div className="mb-5 inline-flex items-center gap-1.5 rounded-full border border-fire/[0.15] bg-fire/[0.07] px-3.5 py-[5px]">
@@ -274,7 +316,7 @@ export default function Home() {
                       rel="noopener noreferrer"
                       className="text-accent hover:text-accent/80"
                     >
-                      radioreference.com&nbsp;&rarr;
+                      openmhz.com&nbsp;&rarr;
                     </a>
                   </>
                 )}
@@ -382,6 +424,12 @@ export default function Home() {
         {/* ── Footer ── */}
         <footer className="mt-16 border-t border-surfaceLight">
           <div className="flex flex-wrap justify-center gap-6 p-6">
+            <Link
+              href="/updates"
+              className="text-xs font-medium text-textHint transition-colors hover:text-textMuted"
+            >
+              Updates
+            </Link>
             <Link
               href="/privacy"
               className="text-xs font-medium text-textHint transition-colors hover:text-textMuted"

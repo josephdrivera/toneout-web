@@ -107,20 +107,20 @@ export default function PrivacyPolicy() {
             <H2>Third-Party Services</H2>
 
             <P>
-              ToneOut streams publicly available audio feeds provided by{" "}
+              ToneOut streams publicly available audio feeds sourced from{" "}
               <a
-                href="https://www.radioreference.com/"
+                href="https://openmhz.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-accent hover:text-accent/80"
               >
-                RadioReference
+                OpenMHz
               </a>
-              . These streams are operated and maintained by RadioReference and
-              its volunteer contributors — ToneOut has no control over their
-              availability, accuracy, or content. RadioReference has its own
-              privacy policy. Push to Talk audio transmission uses Apple&apos;s
-              native PushToTalk framework.
+              , an open-source public safety radio platform. These streams are
+              operated and maintained by volunteer contributors — ToneOut has no
+              control over their availability, accuracy, or content. OpenMHz has
+              its own privacy policy. Push to Talk audio transmission uses
+              Apple&apos;s native PushToTalk framework.
             </P>
 
             <H2>Children&apos;s Privacy</H2>

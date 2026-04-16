@@ -63,17 +63,17 @@ export default function Support() {
             <Q>How does ToneOut work?</Q>
             <P>
               ToneOut streams publicly available police, fire, and EMS audio
-              feeds over the internet. All streams are provided by{" "}
+              feeds over the internet. Streams are sourced from{" "}
               <a
-                href="https://www.radioreference.com/"
+                href="https://openmhz.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-accent hover:text-accent/80"
               >
-                RadioReference
-              </a>{" "}
-              and its volunteer contributors. ToneOut does not operate or
-              control these streams and is not responsible for their
+                OpenMHz
+              </a>
+              , an open-source public safety radio platform. ToneOut does not
+              operate or control these streams and is not responsible for their
               availability. ToneOut does not directly receive radio
               frequencies.
             </P>
@@ -103,14 +103,14 @@ export default function Support() {
 
             <Q>Why is a feed offline or unavailable?</Q>
             <P>
-              All feeds are provided by{" "}
+              Feeds are sourced from{" "}
               <a
-                href="https://www.radioreference.com/"
+                href="https://openmhz.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-accent hover:text-accent/80"
               >
-                RadioReference
+                OpenMHz
               </a>{" "}
               and maintained by volunteers. They may go offline due to equipment
               issues, internet outages, or maintenance on their end. ToneOut has

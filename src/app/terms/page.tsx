@@ -59,17 +59,18 @@ export default function TermsOfUse() {
             <P>
               ToneOut provides access to publicly available live audio streams
               from police, fire, EMS, and other public safety communications.
-              All audio streams and feed data are provided by{" "}
+              Audio streams are sourced from{" "}
               <a
-                href="https://www.radioreference.com/"
+                href="https://openmhz.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-accent hover:text-accent/80"
               >
-                RadioReference
-              </a>{" "}
-              and its volunteer contributors. ToneOut does not operate, control,
-              or guarantee the availability of these streams. ToneOut also
+                OpenMHz
+              </a>
+              , an open-source platform for public safety radio. ToneOut does
+              not operate, control, or guarantee the availability of these
+              streams. ToneOut also
               offers Push to Talk functionality using Apple&apos;s PushToTalk
               framework for walkie-talkie style communication between users.
               ToneOut does not directly intercept, decode, or receive radio
@@ -138,8 +139,8 @@ export default function TermsOfUse() {
 
             <P>
               ToneOut is provided &ldquo;as is&rdquo; without warranties of any
-              kind. All audio streams are sourced from RadioReference and its
-              volunteer contributors. We do not guarantee feed availability,
+              kind. Audio streams are sourced from third-party providers
+              including OpenMHz. We do not guarantee feed availability,
               accuracy, continuity, or Push to Talk connectivity. ToneOut is not
               responsible for streams going offline, being delayed, or becoming
               unavailable. Stream availability depends entirely on third-party
