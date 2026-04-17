@@ -2,14 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Update } from "../data/updates";
-import ShareButtons from "./ShareButtons";
-
-const tagStyles: Record<string, { bg: string; text: string; dot: string; label: string }> = {
-  new: { bg: "bg-ems/10", text: "text-ems", dot: "bg-ems", label: "NEW" },
-  improvement: { bg: "bg-law/10", text: "text-law", dot: "bg-law", label: "IMPROVEMENT" },
-  fix: { bg: "bg-fire/10", text: "text-fire", dot: "bg-fire", label: "FIX" },
-  announcement: { bg: "bg-gold/10", text: "text-gold", dot: "bg-gold", label: "ANNOUNCEMENT" },
-};
+import UpdateItem from "./UpdateItem";
 
 export default function UpdatesTimeline({ updates }: { updates: Update[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -57,7 +50,6 @@ export default function UpdatesTimeline({ updates }: { updates: Update[] }) {
 
       <div className="space-y-6">
         {updates.map((update, index) => {
-          const tag = update.tag ? tagStyles[update.tag] : null;
           const isActive = progress > (index / updates.length) * 100;
 
           return (
@@ -87,33 +79,7 @@ export default function UpdatesTimeline({ updates }: { updates: Update[] }) {
                 />
               </div>
 
-              {/* Date label next to dot */}
-              <time
-                className={`mb-2.5 block text-[11px] font-bold uppercase tracking-[0.12em] transition-colors duration-300 ${
-                  isActive ? "text-accent" : "text-textHint"
-                }`}
-              >
-                {update.date}
-              </time>
-
-              <div className="rounded-xl border border-border bg-surface px-5 py-5 text-left transition-colors">
-                {tag && (
-                  <div className="mb-2 flex flex-wrap items-center gap-2">
-                    <span
-                      className={`rounded-[3px] px-1.5 py-0.5 text-[8px] font-extrabold tracking-[0.1em] ${tag.bg} ${tag.text}`}
-                    >
-                      {tag.label}
-                    </span>
-                  </div>
-                )}
-                <h2 className="mb-1.5 text-sm font-bold text-textSecondary">
-                  {update.title}
-                </h2>
-                <p className="whitespace-pre-line text-xs leading-relaxed text-textMuted">
-                  {update.body}
-                </p>
-                <ShareButtons title={update.title} id={update.id} />
-              </div>
+              <UpdateItem update={update} isActive={isActive} />
             </article>
           );
         })}

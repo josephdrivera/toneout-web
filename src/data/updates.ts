@@ -8,6 +8,13 @@ export interface Update {
 
 export const updates: Update[] = [
   {
+    id: "android-after-ios",
+    date: "April 17, 2026",
+    title: "Android is coming, after iOS",
+    body: "Since opening the waitlist, a ton of you have asked about Android in texts, emails, and DMs. Thank you for the feedback, and for signing up. It's what keeps this moving.\n\nHere's the plan: iOS ships first. After that, work starts on a native Android version of ToneOut, built in Kotlin. Not a port, not a wrapper. A real Android app.\n\nReal talk: I'm a Swift and web developer, not a Kotlin developer. That's where Claude Code comes in. I'll be leaning on it heavily to bridge the gap and help me build a proper Kotlin app from the ground up. It means Android takes longer than iOS did, but it'll be done right.\n\nThe bigger goal is a shared ToneOut network across both platforms. When push-to-talk arrives, iPhone and Android users will be on the same channels and will be able to talk to each other. A few features will stay platform-specific based on what each phone supports, but the core scanner and PTT experience works on both.\n\nOne of the biggest things I've been focused on is latency. It's come up in almost every conversation with people who know radio systems well, and it's something I've been researching hard. A scanner is only as good as how fast audio reaches you. The goal is to push latency as low as physically possible, on both iOS and Android, for both live dispatch audio and push-to-talk between users.\n\niOS first. Android follows.",
+    tag: "announcement",
+  },
+  {
     id: "openmhz-and-dedicated-network",
     date: "April 16, 2025",
     title: "New Audio Infrastructure: OpenMHz & Future Plans",
