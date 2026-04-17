@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Support — ToneOut",
+  title: "Support | ToneOut",
 };
 
 function H2({ children }: { children: React.ReactNode }) {
@@ -90,9 +90,9 @@ export default function Support() {
               A walkie-talkie feature coming in a future update. Communicate
               with your crew using Apple&apos;s native PushToTalk framework. Map
               it to your iPhone&apos;s Action Button for instant one-press
-              transmission. Create channels, save contacts, organize groups —
-              works from the Lock Screen, the Action Button, or anywhere in the
-              system.
+              transmission. Create channels, save contacts, organize groups,
+              and work from the Lock Screen, the Action Button, or anywhere in
+              the system.
             </P>
 
             <Q>Is ToneOut available on Android?</Q>

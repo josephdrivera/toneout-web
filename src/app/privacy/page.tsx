@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — ToneOut",
+  title: "Privacy Policy | ToneOut",
 };
 
 function H2({ children }: { children: React.ReactNode }) {
@@ -117,7 +117,7 @@ export default function PrivacyPolicy() {
                 OpenMHz
               </a>
               , an open-source public safety radio platform. These streams are
-              operated and maintained by volunteer contributors — ToneOut has no
+              operated and maintained by volunteer contributors. ToneOut has no
               control over their availability, accuracy, or content. OpenMHz has
               its own privacy policy. Push to Talk audio transmission uses
               Apple&apos;s native PushToTalk framework.

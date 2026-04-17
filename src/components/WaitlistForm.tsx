@@ -61,7 +61,7 @@ export default function WaitlistForm() {
         </h3>
         <p className="text-[13px] leading-relaxed text-textBody">
           We already have your email. We&apos;ll notify you when ToneOut
-          launches — no need to sign up again.
+          launches. No need to sign up again.
         </p>
       </div>
     );
@@ -88,7 +88,7 @@ export default function WaitlistForm() {
           You&apos;re on the list
         </h3>
         <p className="text-[13px] leading-relaxed text-textBody">
-          We&apos;ll notify you as soon as ToneOut is available. No spam — just
+          We&apos;ll notify you as soon as ToneOut is available. No spam, just
           one email when we launch.
         </p>
       </div>

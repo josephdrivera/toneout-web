@@ -4,11 +4,11 @@ import Nav from "../components/Nav";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "ToneOut — Police, Fire & EMS Scanner for iOS",
+  title: "ToneOut | Police, Fire & EMS Scanner for iOS",
   description:
     "Ad-free police, fire & EMS scanner app with Dual Listen and Push to Talk. Built by a firefighter. iOS.",
   openGraph: {
-    title: "ToneOut — Police, Fire & EMS Scanner for iOS",
+    title: "ToneOut | Police, Fire & EMS Scanner for iOS",
     description:
       "Ad-free police, fire & EMS scanner app with Dual Listen and Push to Talk. Built by a firefighter. iOS.",
     siteName: "ToneOut",

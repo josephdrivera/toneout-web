@@ -80,7 +80,7 @@ const features = [
     ),
     iconBg: "bg-law/10 text-law",
     title: "Powered by OpenMHz",
-    desc: "Live audio streams sourced from OpenMHz \u2014 an open-source platform for streaming and archiving public safety radio communications.",
+    desc: "Live audio streams sourced from OpenMHz, an open-source platform for streaming and archiving public safety radio communications.",
     link: "https://openmhz.com/",
   },
 ];
@@ -347,13 +347,13 @@ export default function Home() {
             </div>
 
             <h2 className="mb-2 text-lg font-bold text-textPrimary">
-              Push to Talk — Channels, Contacts &amp; Groups
+              Push to Talk: Channels, Contacts &amp; Groups
             </h2>
             <p className="mx-auto mb-5 max-w-[460px] text-[13px] leading-[1.7] text-textBody">
               ToneOut is adding built-in walkie-talkie communication using
               Apple&apos;s PushToTalk framework. Map it to your iPhone&apos;s
               Action Button for instant, one-press transmission. Create channels,
-              save contacts, organize your crew into groups — and talk from the
+              save contacts, organize your crew into groups, and talk from the
               Lock Screen, the Action Button, or anywhere in the system.
             </p>
 
@@ -389,7 +389,7 @@ export default function Home() {
             </div>
 
             <p className="mt-4 text-[11px] text-textHint">
-              Powered by Apple&apos;s native PushToTalk framework — works with
+              Powered by Apple&apos;s native PushToTalk framework. Works with
               the Action Button, Lock Screen, Bluetooth accessories, and in the
               background.
             </p>
