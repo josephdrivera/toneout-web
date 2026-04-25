@@ -11,6 +11,12 @@ export const dynamic = "force-dynamic";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const MAX_EMAIL_LENGTH = 254;
+type Platform = "ios" | "android";
+
+const PLATFORM_LABELS: Record<Platform, string> = {
+  ios: "iPhone (iOS)",
+  android: "Android",
+};
 
 const rateMap = new Map<string, number[]>();
 const RATE_WINDOW_MS = 60_000;
@@ -23,6 +29,14 @@ function isRateLimited(ip: string): boolean {
   recent.push(now);
   rateMap.set(ip, recent);
   return recent.length > RATE_LIMIT;
+}
+
+function isPlatform(value: unknown): value is Platform {
+  return value === "ios" || value === "android";
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
 }
 
 export async function POST(request: Request) {
@@ -38,8 +52,10 @@ export async function POST(request: Request) {
       );
     }
 
-    const body = await request.json();
-    const rawEmail = typeof body.email === "string" ? body.email : "";
+    const body: unknown = await request.json();
+    const rawEmail =
+      isRecord(body) && typeof body.email === "string" ? body.email : "";
+    const rawPlatform = isRecord(body) ? body.platform : undefined;
     const email = rawEmail.trim().toLowerCase();
 
     if (!email || email.length > MAX_EMAIL_LENGTH || !EMAIL_RE.test(email)) {
@@ -48,6 +64,13 @@ export async function POST(request: Request) {
         { status: 400 },
       );
     }
+    if (!isPlatform(rawPlatform)) {
+      return NextResponse.json(
+        { error: "Please choose iPhone (iOS) or Android." },
+        { status: 400 },
+      );
+    }
+    const platform = rawPlatform;
 
     const convexUrl = process.env.NEXT_PUBLIC_CONVEX_URL;
     if (!convexUrl) {
@@ -58,7 +81,10 @@ export async function POST(request: Request) {
     }
 
     const convex = new ConvexHttpClient(convexUrl);
-    const result = await convex.mutation(api.waitlist.join, { email });
+    const result = await convex.mutation(api.waitlist.join, {
+      email,
+      platform,
+    });
     const { alreadyJoined } = result;
 
     const resendKey = process.env.RESEND_API_KEY;
@@ -86,7 +112,11 @@ export async function POST(request: Request) {
           from: fromAddress,
           to: adminEmail,
           subject: `New waitlist signup #${totalCount}: ${email}`,
-          html: buildAdminNotificationEmail(email, totalCount),
+          html: buildAdminNotificationEmail(
+            email,
+            totalCount,
+            PLATFORM_LABELS[platform],
+          ),
         });
         if (adminErr) {
           console.error("Admin notification error:", adminErr);

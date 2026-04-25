@@ -1,8 +1,10 @@
 import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 
+const platformValidator = v.union(v.literal("ios"), v.literal("android"));
+
 export const join = mutation({
-  args: { email: v.string() },
+  args: { email: v.string(), platform: v.optional(platformValidator) },
   returns: v.object({
     success: v.boolean(),
     alreadyJoined: v.boolean(),
@@ -16,11 +18,16 @@ export const join = mutation({
       .unique();
 
     if (existing) {
+      if (args.platform && existing.platform !== args.platform) {
+        await ctx.db.patch(existing._id, { platform: args.platform });
+      }
+
       return { success: true, alreadyJoined: true };
     }
 
     await ctx.db.insert("waitlist", {
       email,
+      ...(args.platform ? { platform: args.platform } : {}),
       joinedAt: Date.now(),
     });
 

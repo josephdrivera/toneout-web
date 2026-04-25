@@ -211,6 +211,7 @@ export function buildWaitlistEmail(email: string): string {
 export function buildAdminNotificationEmail(
   email: string,
   totalCount: number,
+  platformLabel: string,
 ): string {
   const time = new Date().toLocaleString("en-US", {
     timeZone: "America/New_York",
@@ -248,6 +249,15 @@ export function buildAdminNotificationEmail(
           <td style="padding:16px 20px 12px;">
             <p style="margin:0 0 4px;font-size:10px;font-weight:700;color:#3e3f50;letter-spacing:0.1em;">EMAIL</p>
             <p style="margin:0;font-size:16px;font-weight:700;color:#e4e5ed;">${email}</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 20px;"><div style="border-top:1px solid #1a1b24;"></div></td>
+        </tr>
+        <tr>
+          <td style="padding:12px 20px;">
+            <p style="margin:0 0 4px;font-size:10px;font-weight:700;color:#3e3f50;letter-spacing:0.1em;">PLATFORM</p>
+            <p style="margin:0;font-size:13px;font-weight:700;color:#d0d1da;">${platformLabel}</p>
           </td>
         </tr>
         <tr>
