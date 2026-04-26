@@ -8,6 +8,14 @@ export interface Update {
 
 export const updates: Update[] = [
   {
+    id: "testflight-beta-android-started",
+    date: "April 26, 2026",
+    title:
+      "TestFlight Beta is Open — And Android Development Has Officially Started",
+    body: "ToneOut is now in public beta on iOS, and we're looking for people to put it through its paces before it hits the App Store. We're also announcing today that Android development is officially underway — sign up at toneout.app so you're on the list when it's ready.\n\nHow to get in on iOS — takes about 60 seconds:\n\n• Download TestFlight from the App Store on your iPhone. It's free and made by Apple — you need it to install beta apps.\n• Sign up at toneout.app to get your personal invite link.\n• Open the invite link on your iPhone. It'll open TestFlight and install ToneOut automatically.\n\nWhat's in the beta:\n\nThis build is close to what we plan to submit to the App Store. Here's what you'll have access to:\n\n• Live scanner feeds via OpenMHz — browse P25 trunked radio systems by state or let the app find ones near you. Tap a system and it plays back calls sequentially, just like a real scanner.\n• Broadcastify streams — conventional scanner feeds from around the country.\n• Dual Listen — run two feeds simultaneously with independent volume control. This is unlocked for free in the beta build so you can test it properly. It'll be a one-time purchase when the app goes live.\n• Saved feeds — bookmark systems and frequencies. Export and import your list as JSON.\n• FCC Station Lookup — search the FCC ULS database by call sign or agency name directly from the app.\n• Background audio and lock screen controls — audio keeps running when your screen is off and shows up in the control center.\n• Location-aware discovery — the Scan tab finds feeds near you with coarse location, or lets you drill down state → county → feed without it.\n\nWhat we're specifically trying to break:\n\nBackground audio is the thing most scanner apps get wrong. We want to know if audio cuts out when you lock your phone, switch apps, get a phone call, or disconnect Bluetooth. If it does, that's the most important thing to report. Beyond that, we want to know how the scanner playback feels on real feeds in your area — call gaps, queue behavior, anything that feels off.\n\nAndroid is coming.\n\nDevelopment started today. We're building it native — no shortcuts, same feature set, same design. If you're on Android, sign up at toneout.app and make sure to let us know. We'll reach out when beta testing opens on that side.\n\nAlready on the waitlist? We don't have your platform on file yet. Send a quick email to josephddev@gmail.com letting us know if you're on iOS or Android and we'll get you sorted.\n\nJoin the beta → toneout.app",
+    tag: "announcement",
+  },
+  {
     id: "android-after-ios",
     date: "April 17, 2026",
     title: "Android is coming, after iOS",
