@@ -306,19 +306,6 @@ export default function Home() {
               </div>
               <p className="text-xs leading-normal text-textMuted">
                 {f.desc}
-                {f.link && (
-                  <>
-                    {" "}
-                    <a
-                      href={f.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-accent hover:text-accent/80"
-                    >
-                      openmhz.com&nbsp;&rarr;
-                    </a>
-                  </>
-                )}
               </p>
             </div>
           ))}
