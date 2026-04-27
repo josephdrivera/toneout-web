@@ -1,6 +1,6 @@
-# ToneOut — Waitlist Website
+# ToneOut: Waitlist Website
 
-Landing page and waitlist for ToneOut, an ad-free police/fire/EMS scanner app for iOS with Dual Listen and Push to Talk.
+Landing page and waitlist for ToneOut, an ad free police/fire/EMS scanner app for iOS with Dual Listen and Push to Talk.
 
 ## Stack
 
@@ -18,11 +18,11 @@ Landing page and waitlist for ToneOut, an ad-free police/fire/EMS scanner app fo
 
 ## Deploy
 
-Push to GitHub → connect in the Vercel dashboard → add environment variables → deploy.
+Push to GitHub, connect in the Vercel dashboard, add environment variables, deploy.
 
 ## Pages
 
-- `/` — Waitlist landing page
-- `/privacy` — Privacy Policy
-- `/terms` — Terms of Use
-- `/support` — Support & FAQ
+- `/`: Waitlist landing page
+- `/privacy`: Privacy Policy
+- `/terms`: Terms of Use
+- `/support`: Support & FAQ

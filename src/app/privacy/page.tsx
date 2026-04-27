@@ -64,7 +64,7 @@ export default function PrivacyPolicy() {
             <P>
               <B>Location Data:</B>{" "}If you grant permission, ToneOut accesses
               your approximate location solely to display nearby scanner feeds.
-              Location data is processed on-device and is not transmitted to our
+              Location data is processed on device and is not transmitted to our
               servers or any third party. You can revoke location access at any
               time in your device settings.
             </P>
@@ -78,7 +78,7 @@ export default function PrivacyPolicy() {
               <B>Push to Talk Data:</B>{" "}When Push to Talk features become
               available, contact names and group names you create are stored
               locally on your device. Audio transmitted via Push to Talk is sent
-              peer-to-peer through Apple&apos;s framework and is not recorded or
+              peer to peer through Apple&apos;s framework and is not recorded or
               stored by ToneOut.
             </P>
             <P>
@@ -92,7 +92,7 @@ export default function PrivacyPolicy() {
               store any payment information.
             </P>
             <P>
-              <B>Analytics:</B>{" "}ToneOut does not use third-party analytics,
+              <B>Analytics:</B>{" "}ToneOut does not use third party analytics,
               tracking SDKs, or advertising frameworks.
             </P>
 
@@ -104,10 +104,10 @@ export default function PrivacyPolicy() {
               pixels. We do not sell, share, or rent any data to third parties.
             </P>
 
-            <H2>Third-Party Services</H2>
+            <H2>Third Party Services</H2>
 
             <P>
-              ToneOut streams publicly available audio feeds sourced from{" "}
+              ToneOut streams publicly available audio feeds from{" "}
               <a
                 href="https://openmhz.com/"
                 target="_blank"
@@ -116,11 +116,20 @@ export default function PrivacyPolicy() {
               >
                 OpenMHz
               </a>
-              , an open-source public safety radio platform. These streams are
-              operated and maintained by volunteer contributors. ToneOut has no
-              control over their availability, accuracy, or content. OpenMHz has
-              its own privacy policy. Push to Talk audio transmission uses
-              Apple&apos;s native PushToTalk framework.
+              ,{" "}
+              <a
+                href="https://www.broadcastify.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent hover:text-accent/80"
+              >
+                Broadcastify
+              </a>
+              , and in the future our own ToneOut network. Third party streams
+              are operated by their respective providers. ToneOut has no control
+              over their availability, accuracy, or content; those providers
+              have their own privacy policies. Push to Talk audio transmission
+              uses Apple&apos;s native PushToTalk framework.
             </P>
 
             <H2>Children&apos;s Privacy</H2>
@@ -133,8 +142,8 @@ export default function PrivacyPolicy() {
             <H2>Data Security</H2>
 
             <P>
-              User data is stored locally on-device and protected by your
-              device&apos;s built-in security measures including encryption and
+              User data is stored locally on device and protected by your
+              device&apos;s built in security measures including encryption and
               biometric locks.
             </P>
 
@@ -142,9 +151,9 @@ export default function PrivacyPolicy() {
 
             <P>
               You may request deletion of your waitlist email at any time by
-              contacting{" "}
-              <span className="text-accent">support@toneout.app</span>. On-device
-              data can be deleted by uninstalling the App.
+              sending a note through Apple TestFlight&apos;s Send Beta Feedback
+              for ToneOut and including the email address you want removed. On
+              device data can be deleted by uninstalling the App.
             </P>
 
             <H2>Changes to This Policy</H2>
@@ -157,8 +166,12 @@ export default function PrivacyPolicy() {
             <H2>Contact</H2>
 
             <P>
-              Questions? Contact us at{" "}
-              <span className="text-accent">support@toneout.app</span>
+              Questions about this policy? During the beta, reach us through
+              Send Beta Feedback in Apple TestFlight for ToneOut (see our{" "}
+              <Link href="/support" className="text-accent hover:text-accent/80">
+                Support
+              </Link>{" "}
+              page).
             </P>
           </div>
         </div>

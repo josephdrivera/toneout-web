@@ -1,6 +1,28 @@
 import type { Update } from "../data/updates";
 import ShareButtons from "./ShareButtons";
 
+/** Renders plain text but turns https:// URLs into outbound links */
+function renderBodyWithLinks(body: string) {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  const segments = body.split(urlRegex);
+  return segments.map((segment, index) => {
+    if (/^https?:\/\//.test(segment)) {
+      return (
+        <a
+          key={index}
+          href={segment}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="break-all font-medium text-accent underline-offset-2 hover:text-accent/80 hover:underline"
+        >
+          {segment}
+        </a>
+      );
+    }
+    return segment;
+  });
+}
+
 const tagStyles: Record<string, { bg: string; text: string; label: string }> = {
   new: { bg: "bg-ems/10", text: "text-ems", label: "NEW" },
   improvement: { bg: "bg-law/10", text: "text-law", label: "IMPROVEMENT" },
@@ -41,7 +63,7 @@ export default function UpdateItem({
           {update.title}
         </h2>
         <p className="whitespace-pre-line text-xs leading-relaxed text-textMuted">
-          {update.body}
+          {renderBodyWithLinks(update.body)}
         </p>
         <ShareButtons title={update.title} id={update.id} />
       </div>

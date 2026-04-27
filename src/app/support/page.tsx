@@ -63,7 +63,7 @@ export default function Support() {
             <Q>How does ToneOut work?</Q>
             <P>
               ToneOut streams publicly available police, fire, and EMS audio
-              feeds over the internet. Streams are sourced from{" "}
+              feeds over the internet. Today those streams come from{" "}
               <a
                 href="https://openmhz.com/"
                 target="_blank"
@@ -72,24 +72,34 @@ export default function Support() {
               >
                 OpenMHz
               </a>
-              , an open-source public safety radio platform. ToneOut does not
-              operate or control these streams and is not responsible for their
-              availability. ToneOut does not directly receive radio
-              frequencies.
+              {" "}
+              and{" "}
+              <a
+                href="https://www.broadcastify.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent hover:text-accent/80"
+              >
+                Broadcastify
+              </a>
+              . Coming soon: our own ToneOut network for listeners who want it
+              straight from us. ToneOut does not operate or control third party
+              streams and is not responsible for their availability. ToneOut does
+              not directly receive radio frequencies.
             </P>
 
             <Q>What is Dual Listen?</Q>
             <P>
               A premium feature that lets you monitor two live feeds
-              simultaneously with independent volume controls. One-time
+              simultaneously with independent volume controls. One time
               purchase, no subscription.
             </P>
 
             <Q>What is Push to Talk?</Q>
             <P>
-              A walkie-talkie feature coming in a future update. Communicate
+              A walkie talkie feature coming in a future update. Communicate
               with your crew using Apple&apos;s native PushToTalk framework. Map
-              it to your iPhone&apos;s Action Button for instant one-press
+              it to your iPhone&apos;s Action Button for instant one press
               transmission. Create channels, save contacts, organize groups,
               and work from the Lock Screen, the Action Button, or anywhere in
               the system.
@@ -103,19 +113,11 @@ export default function Support() {
 
             <Q>Why is a feed offline or unavailable?</Q>
             <P>
-              Feeds are sourced from{" "}
-              <a
-                href="https://openmhz.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent hover:text-accent/80"
-              >
-                OpenMHz
-              </a>{" "}
-              and maintained by volunteers. They may go offline due to equipment
-              issues, internet outages, or maintenance on their end. ToneOut has
-              no control over individual stream availability. Try again later or
-              search for an alternate feed in your area.
+              Feeds come from OpenMHz, Broadcastify, and (eventually) ToneOut&apos;s
+              network. Third party streams may go offline due to equipment issues,
+              internet outages, or maintenance on their providers&apos; side.
+              ToneOut has no control over individual stream availability. Try
+              again later or search for an alternate feed in your area.
             </P>
 
             <Q>How do I restore my purchase on a new device?</Q>
@@ -142,13 +144,28 @@ export default function Support() {
               for full details.
             </P>
 
+            <Q>How do I report a bug or send feedback?</Q>
+            <P>
+              During the beta, use Apple&apos;s TestFlight: open the TestFlight
+              app, select ToneOut, then tap{" "}
+              <span className="font-semibold text-textSecondary">
+                Send Beta Feedback
+              </span>
+              . You can attach a screenshot, describe what happened, and submit.
+              That is the best way to reach us about crashes, audio issues, or
+              anything that feels off.
+            </P>
+
             <H2>Contact Us</H2>
 
             <P>
-              For questions, feedback, or bug reports:{" "}
-              <span className="text-accent">support@toneout.app</span>
+              While ToneOut is in beta, please use{" "}
+              <span className="font-semibold text-textSecondary">
+                Send Beta Feedback
+              </span>{" "}
+              in TestFlight (screenshots and notes welcome). We read every
+              report.
             </P>
-            <P>We respond within 48 hours.</P>
 
             <H2>Refunds</H2>
 

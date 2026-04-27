@@ -145,7 +145,7 @@ export function buildWaitlistEmail(email: string): string {
                 </td>
                 <td style="padding-left:12px;">
                   <p style="margin:0;font-size:13px;font-weight:600;color:#d0d1da;">Push to Talk</p>
-                  <p style="margin:2px 0 0;font-size:11px;color:#50515f;">Walkie-talkie with your crew via Action Button</p>
+                  <p style="margin:2px 0 0;font-size:11px;color:#50515f;">Walkie talkie with your crew via Action Button</p>
                 </td>
               </tr>
             </table>
@@ -160,7 +160,7 @@ export function buildWaitlistEmail(email: string): string {
                 </td>
                 <td style="padding-left:12px;">
                   <p style="margin:0;font-size:13px;font-weight:600;color:#d0d1da;">No Ads. Ever.</p>
-                  <p style="margin:2px 0 0;font-size:11px;color:#50515f;">Clean, distraction-free listening</p>
+                  <p style="margin:2px 0 0;font-size:11px;color:#50515f;">Clean, distraction free listening</p>
                 </td>
               </tr>
             </table>

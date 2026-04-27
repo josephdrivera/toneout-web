@@ -28,7 +28,7 @@ const features = [
     ),
     iconBg: "bg-gold/10 text-gold",
     title: "Push to Talk",
-    desc: "Walkie-talkie style communication with your crew. Map it to your iPhone\u2019s Action Button for instant transmission. Powered by Apple\u2019s PushToTalk framework.",
+    desc: "Walkie talkie style communication with your crew. Map it to your iPhone\u2019s Action Button for instant transmission. Powered by Apple\u2019s PushToTalk framework.",
     pro: true,
     comingSoon: true,
     goldBorder: true,
@@ -79,9 +79,8 @@ const features = [
       </>
     ),
     iconBg: "bg-law/10 text-law",
-    title: "Powered by OpenMHz",
-    desc: "Live audio streams sourced from OpenMHz, an open-source platform for streaming and archiving public safety radio communications.",
-    link: "https://openmhz.com/",
+    title: "OpenMHz, Broadcastify & more",
+    desc: "Live feeds from OpenMHz and Broadcastify. Coming soon: our very own ToneOut network.",
   },
 ];
 
@@ -214,12 +213,12 @@ export default function Home() {
           <p className="mx-auto mb-3 max-w-[460px] text-lg font-medium leading-normal text-textBody">
             Scanner. Push to Talk. One app.
             <br />
-            Clean. Ad-free. Built for first responders.
+            Clean. Ad free. Built for first responders.
           </p>
 
           <p className="mx-auto mb-9 max-w-[400px] text-[13px] leading-relaxed text-textHint">
             Stream live police, fire &amp; EMS dispatch audio. Monitor two
-            channels at once. Talk to your crew with built-in Push to Talk. Save
+            channels at once. Talk to your crew with built in Push to Talk. Save
             your frequencies. No ads. No clutter.
           </p>
 
@@ -350,9 +349,9 @@ export default function Home() {
               Push to Talk: Channels, Contacts &amp; Groups
             </h2>
             <p className="mx-auto mb-5 max-w-[460px] text-[13px] leading-[1.7] text-textBody">
-              ToneOut is adding built-in walkie-talkie communication using
+              ToneOut is adding built in walkie talkie communication using
               Apple&apos;s PushToTalk framework. Map it to your iPhone&apos;s
-              Action Button for instant, one-press transmission. Create channels,
+              Action Button for instant, one press transmission. Create channels,
               save contacts, organize your crew into groups, and talk from the
               Lock Screen, the Action Button, or anywhere in the system.
             </p>

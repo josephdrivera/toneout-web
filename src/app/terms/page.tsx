@@ -59,7 +59,7 @@ export default function TermsOfUse() {
             <P>
               ToneOut provides access to publicly available live audio streams
               from police, fire, EMS, and other public safety communications.
-              Audio streams are sourced from{" "}
+              Streams are sourced from{" "}
               <a
                 href="https://openmhz.com/"
                 target="_blank"
@@ -68,14 +68,23 @@ export default function TermsOfUse() {
               >
                 OpenMHz
               </a>
-              , an open-source platform for public safety radio. ToneOut does
-              not operate, control, or guarantee the availability of these
-              streams. ToneOut also
-              offers Push to Talk functionality using Apple&apos;s PushToTalk
-              framework for walkie-talkie style communication between users.
-              ToneOut does not directly intercept, decode, or receive radio
-              frequencies. The App is currently available on iOS. An Android
-              version is planned for a future release.
+              ,{" "}
+              <a
+                href="https://www.broadcastify.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent hover:text-accent/80"
+              >
+                Broadcastify
+              </a>
+              , and in the future ToneOut&apos;s own network. ToneOut does not
+              operate, control, or guarantee the availability of third party
+              streams. ToneOut also offers Push to Talk functionality using
+              Apple&apos;s PushToTalk framework for walkie talkie style
+              communication between users. ToneOut does not directly intercept,
+              decode, or receive radio frequencies. The App is currently
+              available on iOS. An Android version is planned for a future
+              release.
             </P>
 
             <H2>Acceptable Use</H2>
@@ -120,10 +129,10 @@ export default function TermsOfUse() {
               content.
             </P>
 
-            <H2>In-App Purchases</H2>
+            <H2>In App Purchases</H2>
 
             <P>
-              ToneOut offers optional premium features as one-time in-app
+              ToneOut offers optional premium features as one time in app
               purchases through Apple. All purchases are governed by
               Apple&apos;s terms and refund policies.
             </P>
@@ -139,11 +148,12 @@ export default function TermsOfUse() {
 
             <P>
               ToneOut is provided &ldquo;as is&rdquo; without warranties of any
-              kind. Audio streams are sourced from third-party providers
-              including OpenMHz. We do not guarantee feed availability,
+              kind. Audio streams are sourced from third party providers
+              including OpenMHz and Broadcastify; ToneOut&apos;s own network may
+              be offered in the future. We do not guarantee feed availability,
               accuracy, continuity, or Push to Talk connectivity. ToneOut is not
               responsible for streams going offline, being delayed, or becoming
-              unavailable. Stream availability depends entirely on third-party
+              unavailable. Stream availability depends entirely on third party
               infrastructure beyond our control.
             </P>
 
@@ -171,8 +181,15 @@ export default function TermsOfUse() {
             <H2>Contact</H2>
 
             <P>
-              Questions?{" "}
-              <span className="text-accent">support@toneout.app</span>
+              Questions during the beta? Use{" "}
+              <span className="font-semibold text-textSecondary">
+                Send Beta Feedback
+              </span>{" "}
+              in Apple TestFlight for ToneOut. See our{" "}
+              <Link href="/support" className="text-accent hover:text-accent/80">
+                Support
+              </Link>{" "}
+              page for steps.
             </P>
           </div>
         </div>
