@@ -4,9 +4,36 @@ export interface Update {
   title: string;
   body: string;
   tag?: "new" | "improvement" | "fix" | "announcement";
+  cta?: {
+    label: string;
+    href: string;
+    tone?: "fire" | "accent";
+    note?: {
+      prefix: string;
+      linkLabel: string;
+      href: string;
+    };
+  };
 }
 
 export const updates: Update[] = [
+  {
+    id: "first-toneout-node-live",
+    date: "May 25, 2026",
+    title: "First ToneOut Node is live for testing",
+    body: "The first ToneOut Node went live today. ToneOut Nodes are our own self-hosted radio feeds \u2014 a Raspberry Pi with an SDR antenna running out of Glastonbury, CT, streaming local fire and EMS dispatch over HTTPS to anyone who wants to listen.\n\nThree streams are public right now from the Glastonbury node:\n\n\u2022 Dispatch (452.445 MHz)\n\u2022 EMS (453.075 MHz)\n\u2022 Combined Fire/EMS\n\nListen at feeds.toneout.app \u2014 the dashboard lists each one. Most useful when there's actually a run going.\n\nThis is beta \u2014 one node, one town, one antenna. The bigger plan is a distributed network of these nodes hosted by first responders, radio enthusiasts, and anyone else who wants to put one up for their own town. I'll be putting together pre-configured kits for anyone who wants one \u2014 power them on, plug into internet, and the node automatically joins the ToneOut network and starts feeding. If you'd rather configure your own, I'll provide the full instructions for that path too. Either way, all you need on your end is power and internet.\n\nThe iOS app is in TestFlight and is being wired up to consume these streams next.\n\nIf you hear something cut out, sound rough, or fail to load \u2014 let me know. Beta means feedback matters.\n\nIf you're interested in hosting a node for your town, get in touch.",
+    tag: "new",
+    cta: {
+      label: "Listen now",
+      href: "https://feeds.toneout.app",
+      tone: "fire",
+      note: {
+        prefix: "Best on iPhone \u2014 ",
+        linkLabel: "open in the ToneOut TestFlight beta",
+        href: "https://testflight.apple.com/join/KMJQ1YVE",
+      },
+    },
+  },
   {
     id: "toneout-beta-is-open",
     date: "April 28, 2026",

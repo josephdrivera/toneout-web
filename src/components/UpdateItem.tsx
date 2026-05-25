@@ -30,6 +30,12 @@ const tagStyles: Record<string, { bg: string; text: string; label: string }> = {
   announcement: { bg: "bg-gold/10", text: "text-gold", label: "ANNOUNCEMENT" },
 };
 
+const ctaToneStyles: Record<"fire" | "accent", string> = {
+  fire: "border-fire/25 bg-fire/10 text-fire hover:border-fire/45 hover:bg-fire/15",
+  accent:
+    "border-accent/25 bg-accent/10 text-accent hover:border-accent/45 hover:bg-accent/15",
+};
+
 export default function UpdateItem({
   update,
   isActive = false,
@@ -65,6 +71,43 @@ export default function UpdateItem({
         <p className="whitespace-pre-line text-xs leading-relaxed text-textMuted">
           {renderBodyWithLinks(update.body)}
         </p>
+        {update.cta && (
+          <div className="mt-4">
+            <a
+              href={update.cta.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-semibold transition-colors ${
+                ctaToneStyles[update.cta.tone ?? "accent"]
+              }`}
+            >
+              <svg
+                width="11"
+                height="11"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                stroke="none"
+                aria-hidden
+              >
+                <path d="M8 5v14l11-7z" />
+              </svg>
+              {update.cta.label}
+            </a>
+            {update.cta.note && (
+              <p className="mt-2 text-[11px] leading-relaxed text-textHint">
+                {update.cta.note.prefix}
+                <a
+                  href={update.cta.note.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-accent underline-offset-2 hover:text-accent/80 hover:underline"
+                >
+                  {update.cta.note.linkLabel}
+                </a>
+              </p>
+            )}
+          </div>
+        )}
         <ShareButtons title={update.title} id={update.id} />
       </div>
     </>

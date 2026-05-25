@@ -11,7 +11,7 @@ const links = [
   { href: "/support", label: "Support" },
 ] as const;
 
-const DASHBOARD_URL = "https://feeds.toneout.app/";
+const NODE_STATUS_URL = "https://feeds.toneout.app/";
 
 export default function Nav() {
   const pathname = usePathname();
@@ -66,27 +66,26 @@ export default function Nav() {
           </div>
 
           <a
-            href={DASHBOARD_URL}
+            href={NODE_STATUS_URL}
             rel="noopener"
-            className="inline-flex items-center gap-1.5 rounded-md border border-accent/30 bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent transition-colors hover:border-accent/50 hover:bg-accent/15"
+            title="ToneOut Network node status"
+            className="inline-flex items-center gap-1 rounded-md border border-transparent px-2 py-1.5 text-xs font-medium text-textMuted transition-colors hover:text-textBody"
           >
+            ToneOut Node
             <svg
-              width="11"
-              height="11"
+              width="9"
+              height="9"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth="2.5"
+              strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
               aria-hidden
+              className="opacity-50"
             >
-              <rect x="3" y="3" width="7" height="9" />
-              <rect x="14" y="3" width="7" height="5" />
-              <rect x="14" y="12" width="7" height="9" />
-              <rect x="3" y="16" width="7" height="5" />
+              <path d="M7 17L17 7M9 7h8v8" />
             </svg>
-            Dashboard
           </a>
 
           <NetworkStatusIndicator />
