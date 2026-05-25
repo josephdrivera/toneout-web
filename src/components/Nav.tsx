@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import NetworkStatusIndicator from "./NetworkStatusIndicator";
 
 const links = [
   { href: "/updates", label: "Updates" },
@@ -9,6 +10,8 @@ const links = [
   { href: "/terms", label: "Terms" },
   { href: "/support", label: "Support" },
 ] as const;
+
+const DASHBOARD_URL = "https://feeds.toneout.app/";
 
 export default function Nav() {
   const pathname = usePathname();
@@ -18,7 +21,7 @@ export default function Nav() {
       className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/92 backdrop-blur-xl"
       aria-label="Main"
     >
-      <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
+      <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
         <Link href="/" className="flex items-center gap-3">
           <div className="flex size-[30px] shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-fire to-law">
             <svg
@@ -39,26 +42,54 @@ export default function Nav() {
           </span>
         </Link>
 
-        <div className="flex items-center gap-1.5">
-          {links.map((link) => {
-            const isActive = pathname === link.href;
+        <div className="flex items-center gap-1.5 sm:gap-3">
+          <div className="hidden items-center gap-1.5 sm:flex">
+            {links.map((link) => {
+              const isActive = pathname === link.href;
 
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                aria-current={isActive ? "page" : undefined}
-                className={[
-                  "rounded-md border px-3 py-1.5 text-xs font-semibold transition-colors",
-                  isActive
-                    ? "border-borderBright bg-borderBright text-textSecondary"
-                    : "border-transparent bg-transparent text-textMuted",
-                ].join(" ")}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={[
+                    "rounded-md border px-3 py-1.5 text-xs font-semibold transition-colors",
+                    isActive
+                      ? "border-borderBright bg-borderBright text-textSecondary"
+                      : "border-transparent bg-transparent text-textMuted",
+                  ].join(" ")}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+          </div>
+
+          <a
+            href={DASHBOARD_URL}
+            rel="noopener"
+            className="inline-flex items-center gap-1.5 rounded-md border border-accent/30 bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent transition-colors hover:border-accent/50 hover:bg-accent/15"
+          >
+            <svg
+              width="11"
+              height="11"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden
+            >
+              <rect x="3" y="3" width="7" height="9" />
+              <rect x="14" y="3" width="7" height="5" />
+              <rect x="14" y="12" width="7" height="9" />
+              <rect x="3" y="16" width="7" height="5" />
+            </svg>
+            Dashboard
+          </a>
+
+          <NetworkStatusIndicator />
         </div>
       </div>
     </nav>
