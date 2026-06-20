@@ -109,15 +109,6 @@ export default function PrivacyPolicy() {
             <P>
               ToneOut streams publicly available audio feeds from{" "}
               <a
-                href="https://openmhz.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent hover:text-accent/80"
-              >
-                OpenMHz
-              </a>
-              ,{" "}
-              <a
                 href="https://www.broadcastify.com/"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -125,7 +116,8 @@ export default function PrivacyPolicy() {
               >
                 Broadcastify
               </a>
-              , and in the future our own ToneOut network. Third party streams
+              {" "}
+              and, in the future, our own ToneOut network. Third party streams
               are operated by their respective providers. ToneOut has no control
               over their availability, accuracy, or content; those providers
               have their own privacy policies. Push to Talk audio transmission

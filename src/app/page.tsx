@@ -79,8 +79,8 @@ const features = [
       </>
     ),
     iconBg: "bg-law/10 text-law",
-    title: "OpenMHz, Broadcastify & more",
-    desc: "Live feeds from OpenMHz and Broadcastify. Coming soon: our very own ToneOut network.",
+    title: "Broadcastify & more",
+    desc: "Live feeds from Broadcastify. Coming soon: our very own ToneOut network.",
   },
 ];
 

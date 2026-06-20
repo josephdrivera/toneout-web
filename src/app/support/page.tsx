@@ -65,16 +65,6 @@ export default function Support() {
               ToneOut streams publicly available police, fire, and EMS audio
               feeds over the internet. Today those streams come from{" "}
               <a
-                href="https://openmhz.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent hover:text-accent/80"
-              >
-                OpenMHz
-              </a>
-              {" "}
-              and{" "}
-              <a
                 href="https://www.broadcastify.com/"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -113,7 +103,7 @@ export default function Support() {
 
             <Q>Why is a feed offline or unavailable?</Q>
             <P>
-              Feeds come from OpenMHz, Broadcastify, and (eventually) ToneOut&apos;s
+              Feeds come from Broadcastify and (eventually) ToneOut&apos;s
               network. Third party streams may go offline due to equipment issues,
               internet outages, or maintenance on their providers&apos; side.
               ToneOut has no control over individual stream availability. Try

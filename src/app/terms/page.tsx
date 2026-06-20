@@ -61,15 +61,6 @@ export default function TermsOfUse() {
               from police, fire, EMS, and other public safety communications.
               Streams are sourced from{" "}
               <a
-                href="https://openmhz.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent hover:text-accent/80"
-              >
-                OpenMHz
-              </a>
-              ,{" "}
-              <a
                 href="https://www.broadcastify.com/"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -77,7 +68,8 @@ export default function TermsOfUse() {
               >
                 Broadcastify
               </a>
-              , and in the future ToneOut&apos;s own network. ToneOut does not
+              {" "}
+              and, in the future, ToneOut&apos;s own network. ToneOut does not
               operate, control, or guarantee the availability of third party
               streams. ToneOut also offers Push to Talk functionality using
               Apple&apos;s PushToTalk framework for walkie talkie style
@@ -149,7 +141,7 @@ export default function TermsOfUse() {
             <P>
               ToneOut is provided &ldquo;as is&rdquo; without warranties of any
               kind. Audio streams are sourced from third party providers
-              including OpenMHz and Broadcastify; ToneOut&apos;s own network may
+              including Broadcastify; ToneOut&apos;s own network may
               be offered in the future. We do not guarantee feed availability,
               accuracy, continuity, or Push to Talk connectivity. ToneOut is not
               responsible for streams going offline, being delayed, or becoming
