@@ -6,6 +6,7 @@ import NetworkStatusIndicator from "./NetworkStatusIndicator";
 
 const links = [
   { href: "/updates", label: "Updates" },
+  { href: "/roadmap", label: "Roadmap" },
   { href: "/privacy", label: "Privacy" },
   { href: "/terms", label: "Terms" },
   { href: "/support", label: "Support" },

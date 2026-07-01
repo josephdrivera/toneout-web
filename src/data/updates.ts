@@ -1,3 +1,5 @@
+import { APP_STORE_URL } from "../lib/links";
+
 export interface Update {
   id: string;
   date: string;
@@ -17,6 +19,18 @@ export interface Update {
 }
 
 export const updates: Update[] = [
+  {
+    id: "now-on-the-app-store",
+    date: "July 1, 2026",
+    title: "ToneOut Is Live on the App Store",
+    body: "It's official — ToneOut is approved and live on the App Store. After months of building, testing, and a stint in Apple's review queue, you can download it right now, for free.\n\nWhat you get today\n\nA free, ad-free scanner for iPhone. Stream live police, fire, and EMS dispatch audio from a curated library of Broadcastify feeds across nine states — Connecticut, New York, New Jersey, Pennsylvania, Massachusetts, Florida, Illinois, Texas, and California. Save your favorites for one-tap access, and keep your stream controls handy with the persistent Now Playing bar. No account, no subscription.\n\nGo further with Pro (one-time purchase, no subscriptions): Dual Listen monitors two feeds at once with independent volume, and Background Audio keeps you listening from the Lock Screen and Control Center while you use other apps.\n\nWhat's next\n\nWe're just getting started. Android beta opens by the end of this week, we're adding more states to our Broadcastify coverage, and we're bringing more ToneOut Network nodes online. Push to Talk is what we're building next — it lands on iOS first, then Android after testing. See the full plan on our new roadmap, and tell us what you want built.\n\nDownload ToneOut free on the App Store and see the roadmap at https://toneout.app/roadmap.",
+    tag: "announcement",
+    cta: {
+      label: "Download on the App Store",
+      href: APP_STORE_URL,
+      tone: "fire",
+    },
+  },
   {
     id: "toneout-is-here",
     date: "June 19, 2026",

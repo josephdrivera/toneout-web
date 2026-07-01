@@ -208,6 +208,86 @@ export function buildWaitlistEmail(email: string): string {
   return wrap("Welcome to the ToneOut Waitlist", card);
 }
 
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+export function buildIdeaNotificationEmail(
+  idea: string,
+  email?: string,
+): string {
+  const time = new Date().toLocaleString("en-US", {
+    timeZone: "America/New_York",
+    dateStyle: "medium",
+    timeStyle: "short",
+  });
+
+  const ideaHtml = escapeHtml(idea).replace(/\n/g, "<br />");
+  const fromLine = email
+    ? escapeHtml(email)
+    : `<span style="color:#50515f;">Anonymous (no email provided)</span>`;
+
+  const card = `
+<tr>
+  <td style="background-color:#0f1018;border:1px solid #1a1b24;border-radius:16px;overflow:hidden;">
+
+    <!-- Accent bar -->
+    <div style="height:3px;background:linear-gradient(90deg,#4878a8 0%,#c89b3c 100%);"></div>
+
+    <div style="padding:36px 32px 32px;">
+
+      <!-- Badge -->
+      <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+        <tr>
+          <td align="center" style="padding-bottom:20px;">
+            <div style="display:inline-block;background-color:rgba(72,120,168,0.1);border:1px solid rgba(72,120,168,0.15);border-radius:20px;padding:4px 14px;">
+              <span style="font-size:10px;font-weight:700;color:#4878a8;letter-spacing:0.1em;">NEW ROADMAP IDEA</span>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+      <!-- Idea card -->
+      <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color:#111219;border:1px solid #16171f;border-radius:12px;">
+        <tr>
+          <td style="padding:16px 20px;">
+            <p style="margin:0 0 8px;font-size:10px;font-weight:700;color:#3e3f50;letter-spacing:0.1em;">IDEA</p>
+            <p style="margin:0;font-size:15px;font-weight:500;color:#e4e5ed;line-height:1.6;">${ideaHtml}</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 20px;"><div style="border-top:1px solid #1a1b24;"></div></td>
+        </tr>
+        <tr>
+          <td style="padding:12px 20px;">
+            <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+              <tr>
+                <td>
+                  <p style="margin:0 0 4px;font-size:10px;font-weight:700;color:#3e3f50;letter-spacing:0.1em;">FROM</p>
+                  <p style="margin:0;font-size:13px;font-weight:700;color:#d0d1da;">${fromLine}</p>
+                </td>
+                <td align="right">
+                  <p style="margin:0 0 4px;font-size:10px;font-weight:700;color:#3e3f50;letter-spacing:0.1em;">TIME</p>
+                  <p style="margin:0;font-size:13px;color:#8a8b97;">${time} ET</p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+
+    </div>
+  </td>
+</tr>`;
+
+  return wrap("New ToneOut Roadmap Idea", card);
+}
+
 export function buildAdminNotificationEmail(
   email: string,
   totalCount: number,

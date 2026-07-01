@@ -72,8 +72,8 @@ export default function WaitlistForm() {
           You&apos;re already on the list
         </h3>
         <p className="text-[13px] leading-relaxed text-textBody">
-          We already have your email. We&apos;ll notify you when ToneOut
-          launches. No need to sign up again.
+          We already have your email. We&apos;ll notify you the moment the
+          Android beta opens. No need to sign up again.
         </p>
       </div>
     );
@@ -100,8 +100,8 @@ export default function WaitlistForm() {
           You&apos;re on the list
         </h3>
         <p className="text-[13px] leading-relaxed text-textBody">
-          We&apos;ll notify you as soon as ToneOut is available. No spam, just
-          one email when we launch.
+          We&apos;ll email you the moment the Android beta opens. No spam, just
+          one email. On iPhone? ToneOut is live on the App Store now.
         </p>
       </div>
     );
@@ -110,10 +110,11 @@ export default function WaitlistForm() {
   return (
     <div className="mx-auto max-w-[440px] rounded-[14px] border border-borderLight bg-surface px-6 py-7">
       <h3 className="mb-1.5 text-center text-base font-bold text-textSecondary">
-        Get Early Access
+        Android is coming — get notified
       </h3>
       <p className="mb-5 text-center text-xs leading-normal text-textMuted">
-        Be the first to know when ToneOut launches. No spam, just one email.
+        iOS is live now. Drop your email and we&apos;ll tell you the moment the
+        Android beta opens. No spam, just one email.
       </p>
       <form onSubmit={handleSubmit} noValidate className="space-y-3">
         <div className="flex gap-2">
@@ -140,7 +141,7 @@ export default function WaitlistForm() {
             disabled={status === "loading"}
             className="shrink-0 rounded-[10px] bg-accent px-[22px] text-[13px] font-bold whitespace-nowrap text-white disabled:opacity-60"
           >
-            {status === "loading" ? "Joining\u2026" : "Join Waitlist"}
+            {status === "loading" ? "Joining\u2026" : "Notify Me"}
           </button>
         </div>
         <fieldset className="grid grid-cols-2 gap-2">

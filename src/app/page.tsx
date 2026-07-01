@@ -1,5 +1,6 @@
 import Link from "next/link";
 import WaitlistForm from "../components/WaitlistForm";
+import AppStoreButton from "../components/AppStoreButton";
 import { updates } from "../data/updates";
 
 const features = [
@@ -69,7 +70,6 @@ const features = [
     title: "Background Audio",
     desc: "Keep listening while using other apps. Lock Screen and Control Center playback.",
     pro: true,
-    comingSoon: true,
   },
   {
     paths: (
@@ -195,14 +195,14 @@ export default function Home() {
             </Link>
           )}
 
-          {/* Coming soon badge */}
-          <div className="mb-5 inline-flex items-center gap-1.5 rounded-full border border-fire/[0.15] bg-fire/[0.07] px-3.5 py-[5px]">
+          {/* Live badge */}
+          <div className="mb-5 inline-flex items-center gap-1.5 rounded-full border border-ems/[0.2] bg-ems/[0.08] px-3.5 py-[5px]">
             <span
-              className="size-1.5 shrink-0 rounded-full bg-fire pulse-dot"
+              className="size-1.5 shrink-0 rounded-full bg-ems pulse-dot"
               aria-hidden={true}
             />
-            <span className="text-[11px] font-bold tracking-[0.06em] text-fire">
-              COMING SOON
+            <span className="text-[11px] font-bold tracking-[0.06em] text-ems">
+              NOW ON THE APP STORE
             </span>
           </div>
 
@@ -222,6 +222,15 @@ export default function Home() {
             your frequencies. No ads. No clutter.
           </p>
 
+          {/* Primary CTA — download */}
+          <div className="mb-4 flex justify-center">
+            <AppStoreButton />
+          </div>
+          <p className="mb-9 text-[11px] text-textHint">
+            Free on iPhone. iOS 17 and later.
+          </p>
+
+          {/* Secondary — Android waitlist */}
           <WaitlistForm />
 
           {/* Social proof */}
@@ -379,6 +388,27 @@ export default function Home() {
               the Action Button, Lock Screen, Bluetooth accessories, and in the
               background.
             </p>
+
+            <Link
+              href="/roadmap"
+              className="group mt-5 inline-flex items-center gap-1.5 text-xs font-bold text-gold transition-colors hover:text-textPrimary"
+            >
+              See the full roadmap
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="transition-transform group-hover:translate-x-0.5"
+                aria-hidden={true}
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </Link>
           </div>
         </section>
 
@@ -415,6 +445,12 @@ export default function Home() {
               className="text-xs font-medium text-textHint transition-colors hover:text-textMuted"
             >
               Updates
+            </Link>
+            <Link
+              href="/roadmap"
+              className="text-xs font-medium text-textHint transition-colors hover:text-textMuted"
+            >
+              Roadmap
             </Link>
             <Link
               href="/privacy"
