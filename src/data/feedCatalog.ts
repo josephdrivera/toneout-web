@@ -87,6 +87,21 @@ export const feedCatalog: FeedCatalog = {
       tone: { type: "none", value: "" },
       kind: "live",
     },
+    {
+      id: "toneout-test",
+      name: "TEST — Continuous Loop",
+      agency: GLASTONBURY.agency,
+      service: "fire",
+      state: GLASTONBURY.state,
+      county: GLASTONBURY.county,
+      lat: GLASTONBURY.lat,
+      lon: GLASTONBURY.lon,
+      stream_url: streamUrl("toneout-test"),
+      frequency_mhz: 0,
+      modulation: "FM",
+      tone: { type: "none", value: "" },
+      kind: "live",
+    },
   ],
 };
 
