@@ -68,9 +68,47 @@ export default function UpdateItem({
         <h2 className="mb-1.5 text-sm font-bold text-textSecondary">
           {update.title}
         </h2>
-        <p className="whitespace-pre-line text-xs leading-relaxed text-textMuted">
-          {renderBodyWithLinks(update.body)}
-        </p>
+        {update.blocks
+          ? update.blocks.map((block, index) => {
+              if (block.type === "taggedLine") {
+                return (
+                  <p
+                    key={index}
+                    className="mt-3 text-xs leading-relaxed text-textMuted"
+                  >
+                    <span className="mr-1.5 inline-block rounded-[3px] bg-gold/10 px-1.5 py-0.5 align-[1px] text-[8px] font-extrabold tracking-[0.1em] text-gold">
+                      {block.tag}
+                    </span>
+                    {renderBodyWithLinks(block.text)}
+                  </p>
+                );
+              }
+              if (block.type === "disclaimer") {
+                return (
+                  <div
+                    key={index}
+                    className="mt-3 rounded-md border border-border border-l-2 border-l-fire bg-surfaceLight px-4 py-3 text-[11px] leading-relaxed text-textMuted"
+                  >
+                    {renderBodyWithLinks(block.text)}
+                  </div>
+                );
+              }
+              return (
+                <p
+                  key={index}
+                  className={`whitespace-pre-line text-xs leading-relaxed text-textMuted ${
+                    index > 0 ? "mt-3" : ""
+                  }`}
+                >
+                  {renderBodyWithLinks(block.text)}
+                </p>
+              );
+            })
+          : update.body && (
+              <p className="whitespace-pre-line text-xs leading-relaxed text-textMuted">
+                {renderBodyWithLinks(update.body)}
+              </p>
+            )}
         {update.cta && (
           <div className="mt-4">
             <a

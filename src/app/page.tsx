@@ -5,6 +5,17 @@ import { updates } from "../data/updates";
 
 const features = [
   {
+    paths: (
+      <>
+        <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
+        <path d="M13.73 21a2 2 0 01-3.46 0" />
+      </>
+    ),
+    iconBg: "bg-fire/10 text-fire",
+    title: "Tone Alerts",
+    desc: "A push notification the moment your department is toned out. Detects real Quick Call II two-tone pages from Glastonbury dispatch. All-Call free; company alerts coming soon. Does not replace your pager.",
+  },
+  {
     paths: <path d="M2 12h4l3-9 4 18 3-9h4" />,
     iconBg: "bg-fire/10 text-fire",
     title: "Dual Listen",
@@ -217,9 +228,10 @@ export default function Home() {
           </p>
 
           <p className="mx-auto mb-9 max-w-[400px] text-[13px] leading-relaxed text-textHint">
-            Stream live police, fire &amp; EMS dispatch audio. Monitor two
-            channels at once. Talk to your crew with built in Push to Talk. Save
-            your frequencies. No ads. No clutter.
+            Stream live police, fire &amp; EMS dispatch audio. Get a Tone Alert
+            the moment your department is paged out. Monitor two channels at
+            once. Talk to your crew with built in Push to Talk. Save your
+            frequencies. No ads. No clutter.
           </p>
 
           {/* Primary CTA — download */}

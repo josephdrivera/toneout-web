@@ -1,10 +1,18 @@
 import { APP_STORE_URL } from "../lib/links";
 
+export type UpdateBlock =
+  | { type: "text"; text: string }
+  | { type: "taggedLine"; text: string; tag: string }
+  | { type: "disclaimer"; text: string };
+
 export interface Update {
   id: string;
   date: string;
   title: string;
-  body: string;
+  /** Plain-text body. Ignored when `blocks` is set. */
+  body?: string;
+  /** Rich body: ordered blocks with tagged lines and disclaimer callouts. */
+  blocks?: UpdateBlock[];
   tag?: "new" | "improvement" | "fix" | "announcement";
   cta?: {
     label: string;
@@ -19,6 +27,37 @@ export interface Update {
 }
 
 export const updates: Update[] = [
+  {
+    id: "v1-1-tone-alerts",
+    date: "July 21, 2026",
+    title: "ToneOut v1.1 — Tone Alerts",
+    blocks: [
+      {
+        type: "text",
+        text: "ToneOut v1.1 is live on the App Store.\n\nNew: Tone Alerts\n\nGet a push notification the moment your department is toned out. ToneOut listens to Glastonbury dispatch 24/7 and detects real Quick Call II two-tone pages — the same tones your pager hears. When your tones drop, your phone goes off.\n\nAll-Call alerts are free.",
+      },
+      {
+        type: "taggedLine",
+        text: "Individual company alerts: coming soon as a subscription.",
+        tag: "COMING SOON",
+      },
+      {
+        type: "disclaimer",
+        text: "ToneOut does not replace your pager. Tone Alerts are a convenience feature and depend on internet connectivity, push notification delivery, and receiver uptime. Your department-issued pager and official dispatch remain your primary alerting. ToneOut is not an emergency service. Always call 911 in an emergency.",
+      },
+      {
+        type: "text",
+        // TODO: link "Facebook page" to the ToneOut Facebook page URL once it's in the codebase.
+        text: "Also in this release\n\nImproved live stream reliability on ToneOut Network feeds.\n\nFixed an issue where some feeds would load but never play.\n\nMore ToneOut nodes are coming — we're working with fire departments to install receiver nodes in new coverage areas. Want your town covered? Reach out on our Facebook page.\n\nWhy ToneOut\n\nToneOut came out of conversations around the firehouse about gaps in how members get alerted and hear what's going on. It doesn't replace IamResponding or the response apps your department already runs — it's a supplement: live dispatch audio and tone alerts alongside the tools you already have.\n\nToneOut is not an emergency service and is not a substitute for official dispatch paging. Always call 911 in an emergency.",
+      },
+    ],
+    tag: "new",
+    cta: {
+      label: "Download on the App Store",
+      href: APP_STORE_URL,
+      tone: "fire",
+    },
+  },
   {
     id: "now-on-the-app-store",
     date: "July 1, 2026",
