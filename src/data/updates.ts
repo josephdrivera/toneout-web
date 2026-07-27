@@ -28,6 +28,32 @@ export interface Update {
 
 export const updates: Update[] = [
   {
+    id: "node-01-thirteen-channels",
+    date: "July 27, 2026",
+    title: "One Antenna, 13 Channels — the Glastonbury Node Just Got a Lot Bigger",
+    blocks: [
+      {
+        type: "text",
+        text: "ToneOut Node 01 in Glastonbury just went from 3 streams to 13 — same Raspberry Pi, same single antenna.\n\nHere's the trick: the software-defined radio in the node doesn't tune one frequency like a scanner does. It captures a whole 2.4 MHz slice of spectrum at once, and software pulls individual channels out of that slice. Until now we were only decoding two of them. We re-centered the receiver, and now every public safety channel in that slice streams simultaneously — nothing takes turns, nothing gets missed.\n\nNew channels live right now:\n\n• Glastonbury Fire Police (452.1875 MHz)\n• Manchester Fire 1 (452.775 MHz)\n• Manchester Fire 2 / 8th District (453.4625 MHz)\n• South Windsor Fire (453.2375 MHz)\n• Rocky Hill Fire (453.575 MHz)\n• Rocky Hill EMS (453.275 MHz)\n• Wethersfield EMS (453.025 MHz)\n• Marlborough Fire Ops (453.3125 MHz)\n• East Hartford Fire Admin (453.85 MHz)\n• CRCOG Intercity Fire (452.1375 MHz)\n• UCALL40 Mutual Aid (453.2125 MHz)\n\nGlastonbury Dispatch (452.445 MHz) and Glastonbury EMS (453.075 MHz) are unchanged — same streams, same recordings, and Tone Alerts keep watching dispatch 24/7 exactly as before.\n\nIf you already have the app, there's nothing to update. The new feeds show up on their own — just open ToneOut and they're in the list.\n\nOne honest note: the new frequencies come from public scanner databases, and some of that data is old. A few of these channels may turn out to be quiet or moved. If a feed seems dead — or you know the local radio scene and spot something we got wrong — reach out on our Facebook page. That feedback directly shapes what stays, what goes, and what gets added.",
+      },
+      {
+        type: "taggedLine",
+        text: "Two more receivers are already ordered for this node — next up: East Hartford Fire Dispatch (460.600 MHz) and more surrounding towns.",
+        tag: "COMING SOON",
+      },
+      {
+        type: "disclaimer",
+        text: "ToneOut is not an emergency service and does not replace your pager or official dispatch. Scanner audio can be delayed. Always call 911 in an emergency.",
+      },
+    ],
+    tag: "new",
+    cta: {
+      label: "Listen now",
+      href: "https://feeds.toneout.app",
+      tone: "fire",
+    },
+  },
+  {
     id: "v1-1-tone-alerts",
     date: "July 21, 2026",
     title: "ToneOut v1.1 — Tone Alerts",
