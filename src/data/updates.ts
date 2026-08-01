@@ -28,6 +28,27 @@ export interface Update {
 
 export const updates: Update[] = [
   {
+    id: "broadcastify-changes-and-v1-3",
+    date: "August 1, 2026",
+    title: "What Happened to Broadcastify Feeds — and ToneOut v1.3",
+    blocks: [
+      {
+        type: "text",
+        text: "If ToneOut has felt broken this week, you're not imagining it — and it wasn't your phone. Here's the honest rundown of what happened and what we did about it.\n\nTwo separate things went wrong at once.\n\n1. Broadcastify changed how apps can access their audio.\n\nBroadcastify recently retired the free direct-stream links that ToneOut (and other scanner apps) used to play their feeds, and made static stream links a Broadcastify Premium feature. The result: every Broadcastify feed in the app stopped connecting, on every network, while their website kept working. That change happened on their side — but explaining it is on us, and here it is.\n\n2. Our v1.2 update shipped with a real bug.\n\nToneOut Network streams in v1.2 could connect, show LIVE, and then play silence. That one was ours. We found it, fixed it, and rebuilt the streaming engine on the exact playback code that ran reliably for months in v1.1.\n\nWhat v1.3 does\n\n• Broadcastify feeds now open Broadcastify's official player right inside the app — the same free, ad-supported player as their website, so it works the same way the website does and keeps working if they change things again.\n\n• ToneOut Network streams play natively again, on the proven v1.1 audio engine. This also fixes the overheating some of you noticed during long listening sessions.\n\n• Feeds renamed for clarity — \"Glastonbury Dispatch\" is now \"Glastonbury Dispatch Fire.\"\n\nv1.3 is on its way to the App Store now and should be available within a few days, pending Apple review. Update as soon as you see it.\n\nThe bigger lesson\n\nThis week is exactly why the ToneOut Network exists. Feeds that live on someone else's servers can change or disappear overnight — we just lived it. Our own receiver nodes are different: 13 channels are streaming from the Glastonbury node right now, they're ours, and nobody can paywall them or shut them off. More receivers and more towns are already in motion.\n\nQuestions, or a feed acting up? Reach out on our Facebook page — those reports are exactly how this got tracked down.",
+      },
+      {
+        type: "disclaimer",
+        text: "ToneOut is not an emergency service and does not replace your pager or official dispatch. Scanner audio can be delayed. Always call 911 in an emergency.",
+      },
+    ],
+    tag: "announcement",
+    cta: {
+      label: "Download on the App Store",
+      href: APP_STORE_URL,
+      tone: "fire",
+    },
+  },
+  {
     id: "node-01-thirteen-channels",
     date: "July 27, 2026",
     title: "One Antenna, 13 Channels — the Glastonbury Node Just Got a Lot Bigger",
