@@ -45,6 +45,14 @@ const GLASTONBURY: Locale = {
   agency: "Glastonbury Fire & EMS",
 };
 
+const GLASTONBURY_PD: Locale = {
+  state: "CT",
+  county: "Hartford",
+  lat: 41.7123,
+  lon: -72.6081,
+  agency: "Glastonbury Police Department",
+};
+
 const MANCHESTER: Locale = {
   state: "CT",
   county: "Hartford",
@@ -141,6 +149,8 @@ export const feedCatalog: FeedCatalog = {
       type: "ctcss",
       value: "203.5",
     }),
+    // Wired receiver feeding the node directly (not an SDR channel), so no frequency is listed.
+    feed("glastonbury-pd", "Glastonbury PD", GLASTONBURY_PD, "law", 0, NO_TONE),
     feed("manchester-fire-1", "Manchester Fire 1", MANCHESTER, "fire", 452.775, {
       type: "ctcss",
       value: "107.2",
