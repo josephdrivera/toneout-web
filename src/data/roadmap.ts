@@ -70,9 +70,9 @@ export const roadmap: RoadmapItem[] = [
   // ── In Progress ──
   {
     id: "android-beta",
-    title: "Android beta",
+    title: "Android on Google Play",
     description:
-      "A native Android version of ToneOut. Beta testing opens by the end of this week — join the list on the homepage to get notified the moment it's live.",
+      "A native Android version of ToneOut, built in Kotlin. The closed beta ran through a professional QA pass, the v1.1 build is in Google's review queue, and the application to go public on the Play Store is in Google's hands — join the list on the homepage to get the launch email.",
     status: "in-progress",
   },
   {

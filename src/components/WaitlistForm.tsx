@@ -72,8 +72,8 @@ export default function WaitlistForm() {
           You&apos;re already on the list
         </h3>
         <p className="text-[13px] leading-relaxed text-textBody">
-          We already have your email. We&apos;ll notify you the moment the
-          Android beta opens. No need to sign up again.
+          We already have your email. We&apos;ll notify you the moment ToneOut
+          for Android goes live on Google Play. No need to sign up again.
         </p>
       </div>
     );
@@ -100,8 +100,9 @@ export default function WaitlistForm() {
           You&apos;re on the list
         </h3>
         <p className="text-[13px] leading-relaxed text-textBody">
-          We&apos;ll email you the moment the Android beta opens. No spam, just
-          one email. On iPhone? ToneOut is live on the App Store now.
+          We&apos;ll email you the moment ToneOut for Android goes live on
+          Google Play. No spam, just one email. On iPhone? ToneOut is live on
+          the App Store now.
         </p>
       </div>
     );
@@ -110,11 +111,12 @@ export default function WaitlistForm() {
   return (
     <div className="mx-auto max-w-[440px] rounded-[14px] border border-borderLight bg-surface px-6 py-7">
       <h3 className="mb-1.5 text-center text-base font-bold text-textSecondary">
-        Android is coming — get notified
+        Android is almost here — get notified
       </h3>
       <p className="mb-5 text-center text-xs leading-normal text-textMuted">
-        iOS is live now. Drop your email and we&apos;ll tell you the moment the
-        Android beta opens. No spam, just one email.
+        iOS is live now. Android is finished and in Google Play review. Drop
+        your email and we&apos;ll tell you the moment it goes live. No spam,
+        just one email.
       </p>
       <form onSubmit={handleSubmit} noValidate className="space-y-3">
         <div className="flex gap-2">

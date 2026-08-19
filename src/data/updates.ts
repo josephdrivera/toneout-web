@@ -28,6 +28,32 @@ export interface Update {
 
 export const updates: Update[] = [
   {
+    id: "android-in-review",
+    date: "August 19, 2026",
+    title: "ToneOut for Android — In Review Right Now, Public Launch Next",
+    blocks: [
+      {
+        type: "text",
+        text: "Android is the question we get more than any other, so here's the full, honest picture — including the update sitting in Google's review queue as you read this.\n\nWhere Android actually stands\n\nToneOut for Android is built. It's a real native Android app — written in Kotlin, not a port or a web wrapper — and it's been in closed beta testing on Google Play since early July.\n\nHere's the part most people don't see: Google requires new developer accounts to run a closed test and prove the app holds up before it's allowed into the public Play Store. To get through that requirement properly, we ran the beta through a professional QA lab — 25 Android testers working a structured 22-point pass over two weeks: onboarding, live playback, saved and custom feeds, location permissions, billing. Every core flow passed, with zero crashes.\n\nThat testing wrapped, and last night the production application went in — the formal request to take ToneOut public on Google Play. Google reviews those by hand. It can take a few days; it can be faster. The moment it's approved, Android goes live for everyone at once.\n\nThe update in review right now\n\nWhile that application is with Google, a new build — Android v1.1 — is in the review queue and should start reaching beta testers as soon as today. What's in it:\n\n• Broadcastify feeds now open Broadcastify's official player — the same change we shipped on iPhone in v1.3, after Broadcastify retired the direct streams apps used to play.\n\n• Google Play billing rebuilt for the Dual Listen unlock — this one came straight out of the QA findings.\n\n• The new ToneOut app icon.\n\n• Playback and stability fixes, now targeting Android 16.\n\nThis is the exact build that goes public when Google approves the application — it's not a preview, it's the release.\n\nWhat Android gets on day one\n\nThe full ToneOut experience, same as iPhone: browse scanner feeds by state, every ToneOut Network channel — all 14 live streams from the Glastonbury node — Nearby feeds by GPS (location never leaves your phone), saved feeds, custom stream URLs, background playback with lock-screen controls, and Dual Listen as a one-time unlock. Dark, ad-free, no account, no tracking.\n\nAnd Tone Alerts? The groundwork shipped this morning: the Glastonbury node's tone detector — the same one that pages iPhones today — learned to speak Google's push system, and that update is running on the node right now. The Android app already carries the Tone Alerts screen; the next Android build turns it on.\n\nIf you're waiting on Android, do one thing: drop your email in the waitlist below. That list gets exactly one email — the one that says ToneOut is live on Google Play. And when Google gives the word, this page and our Facebook page are where you'll hear it first.",
+      },
+      {
+        type: "taggedLine",
+        text: "Tone Alerts on Android: the server side went live on the node this morning — alerts switch on in the next Android build after launch.",
+        tag: "COMING SOON",
+      },
+      {
+        type: "disclaimer",
+        text: "ToneOut is not an emergency service and does not replace your pager or official dispatch. Scanner audio can be delayed. Always call 911 in an emergency.",
+      },
+    ],
+    tag: "announcement",
+    cta: {
+      label: "Join the Android launch list",
+      href: "https://toneout.app/#android",
+      tone: "fire",
+    },
+  },
+  {
     id: "broadcastify-changes-and-v1-3",
     date: "August 1, 2026",
     title: "What Happened to Broadcastify Feeds — and ToneOut v1.3",

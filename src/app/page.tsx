@@ -243,7 +243,9 @@ export default function Home() {
           </p>
 
           {/* Secondary — Android waitlist */}
-          <WaitlistForm />
+          <div id="android" className="scroll-mt-24">
+            <WaitlistForm />
+          </div>
 
           {/* Social proof */}
           <div className="mt-6 flex items-center justify-center gap-2">
