@@ -56,7 +56,7 @@ export const roadmap: RoadmapItem[] = [
     id: "first-node",
     title: "First ToneOut Node",
     description:
-      "Our own live audio infrastructure went live with the first Raspberry Pi node in Glastonbury, CT — real fire and EMS dispatch streamed straight through the app.",
+      "Our own live audio infrastructure went live with the first Raspberry Pi node in Glastonbury, CT — now streaming 15 live channels of fire, EMS, and police dispatch from towns across the Capitol Region, straight through the app.",
     status: "shipped",
   },
   {
@@ -64,6 +64,13 @@ export const roadmap: RoadmapItem[] = [
     title: "Dual Listen & Background Audio (Pro)",
     description:
       "Monitor two feeds at once with independent volume, and keep listening from the Lock Screen and Control Center. One-time purchase, no subscriptions.",
+    status: "shipped",
+  },
+  {
+    id: "tone-alerts",
+    title: "Tone Alerts",
+    description:
+      "A push notification the moment your department is toned out — ToneOut listens to Glastonbury dispatch 24/7 and detects real Quick Call II two-tone pages. All-Call alerts are free; individual company alerts are coming as a subscription. Live on iOS since v1.1, coming to Android right after launch. Does not replace your pager.",
     status: "shipped",
   },
 
