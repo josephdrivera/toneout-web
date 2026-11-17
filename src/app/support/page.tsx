@@ -171,8 +171,9 @@ export default function Support() {
               >
                 {CONTACT_EMAIL}
               </a>{" "}
-              with your department and town. ToneOut does not replace your
-              pager.
+              with your department and town. This is a beta test and a
+              supplement: ToneOut does not replace your pager, your dispatch,
+              or response apps like IamResponding.
             </P>
 
             <H2>Refunds</H2>
