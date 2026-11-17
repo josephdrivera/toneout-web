@@ -173,7 +173,7 @@ export default function Support() {
               </a>{" "}
               with your department and town. This is a beta test and a
               supplement: ToneOut does not replace your pager, your dispatch,
-              or response apps like IamResponding.
+              or response apps like IamResponding or First Due.
             </P>
 
             <H2>Refunds</H2>
