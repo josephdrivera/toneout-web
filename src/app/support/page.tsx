@@ -173,7 +173,16 @@ export default function Support() {
               </a>{" "}
               with your department and town. This is a beta test and a
               supplement: ToneOut does not replace your pager, your dispatch,
-              or response apps like IamResponding or First Due.
+              or response apps like IamResponding or First Due.{" "}
+              <a
+                href="/ToneOut-for-Your-Firehouse.pdf"
+                target="_blank"
+                rel="noopener"
+                className="text-accent underline-offset-2 hover:underline"
+              >
+                Download the firehouse overview (PDF)
+              </a>
+              .
             </P>
 
             <H2>Refunds</H2>

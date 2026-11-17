@@ -46,6 +46,11 @@ export const updates: Update[] = [
       label: "Email Us About Your Firehouse",
       href: `mailto:${CONTACT_EMAIL}?subject=ToneOut%20node%20for%20our%20firehouse`,
       tone: "fire",
+      note: {
+        prefix: "Want the details first? ",
+        linkLabel: "Download the firehouse overview (PDF)",
+        href: "/ToneOut-for-Your-Firehouse.pdf",
+      },
     },
   },
   {
