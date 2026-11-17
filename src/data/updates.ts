@@ -1,4 +1,4 @@
-import { APP_STORE_URL, CONTACT_EMAIL } from "../lib/links";
+import { ANDROID_LAUNCH_DATE, APP_STORE_URL, CONTACT_EMAIL, PLAY_STORE_URL } from "../lib/links";
 
 export type UpdateBlock =
   | { type: "text"; text: string }
@@ -26,7 +26,63 @@ export interface Update {
   };
 }
 
+/** Published automatically once ANDROID_LAUNCH_DATE is set in lib/links. */
+function androidLaunchUpdate(date: string): Update {
+  return {
+    id: "android-live-on-google-play",
+    date,
+    title: "ToneOut for Android Is Live on Google Play",
+    blocks: [
+      {
+        type: "text",
+        text: "It's the question we've been asked more than any other, and today the answer is yes. ToneOut for Android is live on Google Play, and it's a free download right now.\n\nWhat you get today\n\nThe same ToneOut as iPhone, built as a real native Android app — not a port, not a web wrapper. Browse scanner feeds by state. Listen to every ToneOut Network channel from the Glastonbury node, including Glastonbury Police dispatch. Find feeds near you by GPS; your location never leaves your phone. Save your favorites, add your own stream URLs, and keep listening in the background with lock-screen controls. Dark, ad-free, no account, no tracking.\n\nTone Alerts are in from day one: turn on Glastonbury All-Call and your phone gets a push, with the pager warble, the moment the tones drop. All-Call alerts are free. Alerts for your individual company are a separate one-time purchase per town — pay once, no subscription.\n\nDual Listen — two feeds at once, each with its own volume — is a one-time unlock. No subscription.\n\nOne thing to know about Broadcastify feeds: they open in Broadcastify's official player inside the app, the same way they do on iPhone. Broadcastify retired the direct streams apps used to play, and this is the reliable way to keep those feeds available.\n\nHow we got here\n\nGoogle makes new developers prove an app holds up before it's allowed into the public store. ToneOut went through a closed beta and a professional QA pass — 25 Android testers, two weeks, every core flow — and Google approved it for production. The build on the Play Store today is the one that came out of that testing, plus the fixes it turned up.\n\nIf you were on the launch list, the one email we promised is on its way. If something sounds wrong or a feed drops out, tell us on our Facebook page. Those reports drive what gets fixed next.",
+      },
+      {
+        type: "taggedLine",
+        text: "Tone Alerts on Android: live from day one. All-Call alerts are free; company alerts are a one-time purchase. Does not replace your pager.",
+        tag: "LIVE NOW",
+      },
+      {
+        type: "disclaimer",
+        text: "ToneOut is not an emergency service and does not replace your pager or official dispatch. Scanner audio can be delayed. Always call 911 in an emergency.",
+      },
+    ],
+    tag: "new",
+    cta: {
+      label: "Get ToneOut on Google Play",
+      href: PLAY_STORE_URL,
+      tone: "fire",
+    },
+  };
+}
+
 export const updates: Update[] = [
+  {
+    id: "android-release-in-google-review",
+    date: "November 17, 2026",
+    title: "Android Is Around the Corner: The Release Is in Google's Review",
+    blocks: [
+      {
+        type: "text",
+        text: "Short update for everyone waiting on Android: the public release of ToneOut for Android went to Google this morning, and it is in review right now.\n\nWhere it stands\n\nGoogle already approved ToneOut for the public Play Store. What's in review today is the release itself, the exact build you'll download. Google reviews it, we press publish, and it's live. Google says reviews usually finish within a week. We don't control that clock, so we're not putting a date on it.\n\nWhat's in the build\n\nTone Alerts are in from day one. Turn on Glastonbury All-Call and your phone gets a push, with the pager warble, when the tones drop. This morning a test alert from the Glastonbury node reached the Android build, start to finish. All-Call alerts are free. Alerts for your individual company are a separate one-time purchase per town. Pay once, no subscription.\n\nStandby is in too. If you're listening to music when your department is toned out, your music lowers and the live dispatch channel plays, then your music comes back.\n\nEverything else is the same ToneOut as iPhone: scanner feeds by state, every ToneOut Network channel from the Glastonbury node, feeds near you, saved feeds, and Dual Listen as a one-time unlock. Dark, ad-free, no account, no tracking.\n\nAt launch, ToneOut for Android will be available in the United States.\n\nWhat to do now\n\nIf you want to know the minute it's live, put your email on the launch list below. That list gets one email, the one that says ToneOut is on Google Play. We'll also post it here and on our Facebook page.",
+      },
+      {
+        type: "taggedLine",
+        text: "Tone Alerts on Android: in the launch build. All-Call alerts are free; company alerts are a one-time purchase. Does not replace your pager.",
+        tag: "IN REVIEW",
+      },
+      {
+        type: "disclaimer",
+        text: "ToneOut is not an emergency service and does not replace your pager or official dispatch. Scanner audio can be delayed. Always call 911 in an emergency.",
+      },
+    ],
+    tag: "announcement",
+    cta: {
+      label: "Join the Android launch list",
+      href: "https://toneout.app/#android",
+      tone: "fire",
+    },
+  },
   {
     id: "firehouse-node-beta",
     date: "November 17, 2026",
@@ -53,6 +109,7 @@ export const updates: Update[] = [
       },
     },
   },
+  ...(ANDROID_LAUNCH_DATE ? [androidLaunchUpdate(ANDROID_LAUNCH_DATE)] : []),
   {
     id: "glastonbury-pd-and-ios-v1-3-live",
     date: "August 19, 2026",
@@ -163,7 +220,7 @@ export const updates: Update[] = [
       },
       {
         type: "taggedLine",
-        text: "Individual company alerts: coming soon as a subscription.",
+        text: "Individual company alerts: coming soon as a one-time purchase.",
         tag: "COMING SOON",
       },
       {
