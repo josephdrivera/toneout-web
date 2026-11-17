@@ -1,4 +1,4 @@
-import { APP_STORE_URL } from "../lib/links";
+import { APP_STORE_URL, CONTACT_EMAIL } from "../lib/links";
 
 export type UpdateBlock =
   | { type: "text"; text: string }
@@ -27,6 +27,27 @@ export interface Update {
 }
 
 export const updates: Update[] = [
+  {
+    id: "firehouse-node-beta",
+    date: "November 17, 2026",
+    title: "Fire Departments: We're Looking for Firehouses to Beta Test ToneOut",
+    blocks: [
+      {
+        type: "text",
+        text: "ToneOut's Tone Alerts work because of a small receiver we call a node. It listens for a department's dispatch tones and alerts members' phones seconds later. Right now there is one node, in Glastonbury. We want more.\n\nWhat we're asking\n\nWe're looking for a few fire departments willing to host a node at their station and try Tone Alerts with their members. The node is a small computer with a receive-only radio and an antenna. It needs an outlet and internet. It cannot transmit, and it changes nothing in your paging or dispatch setup.\n\nWhat it costs you\n\nNothing. For the first firehouses, ToneOut covers the node, the install, and managing it. We need your dispatch frequency and tones, a spot to put it, and honest feedback.\n\nInterested?\n\nEmail " + CONTACT_EMAIL + " with your department and town, and we'll take it from there.",
+      },
+      {
+        type: "disclaimer",
+        text: "ToneOut is not an emergency service and does not replace your pager or official dispatch. Scanner audio can be delayed. Always call 911 in an emergency.",
+      },
+    ],
+    tag: "announcement",
+    cta: {
+      label: "Email Us About Your Firehouse",
+      href: `mailto:${CONTACT_EMAIL}?subject=ToneOut%20node%20for%20our%20firehouse`,
+      tone: "fire",
+    },
+  },
   {
     id: "glastonbury-pd-and-ios-v1-3-live",
     date: "August 19, 2026",

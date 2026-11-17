@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CONTACT_EMAIL } from "../../lib/links";
 
 export const metadata: Metadata = {
   title: "Support | ToneOut",
@@ -155,6 +156,23 @@ export default function Support() {
               </span>{" "}
               in TestFlight (screenshots and notes welcome). We read every
               report.
+            </P>
+
+            <H2>Fire Departments: Host a ToneOut Node</H2>
+
+            <P>
+              Want Tone Alerts for your firehouse? We are looking for
+              departments to beta test a ToneOut node at their station. For
+              the first firehouses, ToneOut covers the cost of the node, the
+              install, and managing it. Email{" "}
+              <a
+                href={`mailto:${CONTACT_EMAIL}?subject=ToneOut%20node%20for%20our%20firehouse`}
+                className="text-accent underline-offset-2 hover:underline"
+              >
+                {CONTACT_EMAIL}
+              </a>{" "}
+              with your department and town. ToneOut does not replace your
+              pager.
             </P>
 
             <H2>Refunds</H2>
