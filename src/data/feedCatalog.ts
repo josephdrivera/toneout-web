@@ -109,7 +109,18 @@ const CAPITOL_REGION: Locale = {
   agency: "Capitol Region Mutual Aid",
 };
 
-const streamUrl = (id: string) => `https://feeds.toneout.app/stream/${id}`;
+// Where a feed's audio is served from. Node 01 serves its own channels; feeds
+// carried by the cloud hub use the hub's address.
+const NODE_01_STREAMS = "https://feeds.toneout.app/stream";
+const HUB_STREAMS = "https://hub.toneout.app/stream";
+
+const TONEOUT_NETWORK: Locale = {
+  state: "CT",
+  county: "Hartford",
+  lat: 41.7658,
+  lon: -72.6734,
+  agency: "ToneOut Network",
+};
 
 const feed = (
   id: string,
@@ -118,6 +129,7 @@ const feed = (
   service: Service,
   frequency_mhz: number,
   tone: Tone,
+  streamBase: string = NODE_01_STREAMS,
 ): Feed => ({
   id,
   name,
@@ -127,7 +139,7 @@ const feed = (
   county: locale.county,
   lat: locale.lat,
   lon: locale.lon,
-  stream_url: streamUrl(id),
+  stream_url: `${streamBase}/${id}`,
   frequency_mhz,
   modulation: "FM",
   tone,
@@ -182,9 +194,16 @@ export const feedCatalog: FeedCatalog = {
       type: "ctcss",
       value: "156.7",
     }),
+    // Always-on repeating test message served by the cloud hub, so anyone can
+    // check that streaming works. Not a radio channel, so no frequency.
+    feed("toneout-test", "ToneOut Test Channel", TONEOUT_NETWORK, "fire", 0, NO_TONE, HUB_STREAMS),
   ],
 };
 
-export const expectedFeedIds: ReadonlyArray<string> = feedCatalog.feeds.map(
-  (f) => f.id,
-);
+/**
+ * Feeds the network-status check expects to find on Node 01's stream server.
+ * Hub-served feeds are left out: they are not on that server.
+ */
+export const expectedFeedIds: ReadonlyArray<string> = feedCatalog.feeds
+  .filter((f) => f.stream_url.startsWith(NODE_01_STREAMS))
+  .map((f) => f.id);
