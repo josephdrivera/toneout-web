@@ -308,3 +308,38 @@ export const heartbeat = mutation({
     return "ok";
   },
 });
+
+/**
+ * Read-only license check, used by the hub before it accepts a node's audio.
+ * Does not count as a check-in.
+ */
+export const verifyKey = query({
+  args: { secret: v.string(), keyHash: v.string() },
+  returns: v.union(
+    v.object({
+      nodeId: v.id("nodes"),
+      name: v.string(),
+      town: v.string(),
+      status: v.union(
+        v.literal("pending"),
+        v.literal("active"),
+        v.literal("disabled"),
+      ),
+    }),
+    v.null(),
+  ),
+  handler: async (ctx, args) => {
+    assertEditorSecret(args.secret);
+    const node = await ctx.db
+      .query("nodes")
+      .withIndex("by_keyHash", (q) => q.eq("keyHash", args.keyHash))
+      .unique();
+    if (!node) return null;
+    return {
+      nodeId: node._id,
+      name: node.name,
+      town: node.town,
+      status: node.status,
+    };
+  },
+});
