@@ -111,4 +111,67 @@ export default defineSchema({
     key: v.string(),
     lastSentAt: v.number(),
   }).index("by_key", ["key"]),
+
+  // --- Node network admin (private /admin area) -------------------------
+  adminUsers: defineTable({
+    email: v.string(),
+    name: v.string(),
+    role: v.union(v.literal("owner"), v.literal("admin")),
+    // Set once the person has chosen a password (scrypt hash made in Next).
+    passwordHash: v.optional(v.string()),
+    // One-time invite link: only the SHA-256 of the token is stored.
+    inviteTokenHash: v.optional(v.string()),
+    inviteExpiresAt: v.optional(v.number()),
+    disabled: v.boolean(),
+    createdAt: v.number(),
+    lastLoginAt: v.optional(v.number()),
+  })
+    .index("by_email", ["email"])
+    .index("by_inviteTokenHash", ["inviteTokenHash"]),
+
+  nodes: defineTable({
+    name: v.string(),
+    town: v.string(),
+    hostName: v.optional(v.string()),
+    inputType: v.union(v.literal("sdr"), v.literal("line-in")),
+    // pending = waiting for its claim code to be used; active = licensed;
+    // disabled = license revoked (heartbeats are refused).
+    status: v.union(
+      v.literal("pending"),
+      v.literal("active"),
+      v.literal("disabled"),
+    ),
+    // Only hashes are stored; the code and key are shown or returned once.
+    claimCodeHash: v.optional(v.string()),
+    claimExpiresAt: v.optional(v.number()),
+    keyHash: v.optional(v.string()),
+    requestId: v.optional(v.id("demoRequests")),
+    notes: v.optional(v.string()),
+    createdAt: v.number(),
+    enrolledAt: v.optional(v.number()),
+    lastSeenAt: v.optional(v.number()),
+    health: v.optional(
+      v.object({
+        version: v.optional(v.string()),
+        uptimeSeconds: v.optional(v.number()),
+        cpuTempC: v.optional(v.number()),
+        audioLevel: v.optional(v.number()),
+        lastToneAt: v.optional(v.number()),
+        wifiSignal: v.optional(v.number()),
+        network: v.optional(v.string()),
+        channels: v.optional(v.number()),
+        message: v.optional(v.string()),
+      }),
+    ),
+  })
+    .index("by_keyHash", ["keyHash"])
+    .index("by_claimCodeHash", ["claimCodeHash"])
+    .index("by_requestId", ["requestId"]),
+
+  nodeEvents: defineTable({
+    nodeId: v.id("nodes"),
+    at: v.number(),
+    type: v.string(),
+    detail: v.optional(v.string()),
+  }).index("by_nodeId_at", ["nodeId", "at"]),
 });

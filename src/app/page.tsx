@@ -495,9 +495,18 @@ export default function Home() {
               Support
             </Link>
           </div>
-          <p className="px-6 pb-10 text-center text-[11px] text-textFaint">
+          <p className="px-6 pb-4 text-center text-[11px] text-textFaint">
             © 2026 ToneOut. All rights reserved. Not affiliated with any
             government agency or emergency service.
+          </p>
+          <p className="px-6 pb-10 text-center">
+            <Link
+              href="/admin"
+              rel="nofollow"
+              className="text-[11px] text-textFaint transition-colors hover:text-textMuted"
+            >
+              Admin
+            </Link>
           </p>
         </footer>
       </main>

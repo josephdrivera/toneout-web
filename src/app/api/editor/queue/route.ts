@@ -1,14 +1,12 @@
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "../../../../../convex/_generated/api";
-import { EDITOR_COOKIE, verifySessionCookie } from "../../../../lib/editorSession";
+import { hasEditorAccess } from "../../../../lib/adminSession";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const cookieStore = await cookies();
-  if (!verifySessionCookie(cookieStore.get(EDITOR_COOKIE)?.value)) {
+  if (!(await hasEditorAccess())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

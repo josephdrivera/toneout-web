@@ -8,6 +8,7 @@
  * @module
  */
 
+import type * as admins from "../admins.js";
 import type * as alerts from "../alerts.js";
 import type * as crons from "../crons.js";
 import type * as demoRequests from "../demoRequests.js";
@@ -19,6 +20,7 @@ import type * as lib_rss from "../lib/rss.js";
 import type * as lib_taxonomy from "../lib/taxonomy.js";
 import type * as lib_text from "../lib/text.js";
 import type * as lib_towns from "../lib/towns.js";
+import type * as nodes from "../nodes.js";
 import type * as notifications from "../notifications.js";
 import type * as roadmapIdeas from "../roadmapIdeas.js";
 import type * as seedSources from "../seedSources.js";
@@ -32,6 +34,7 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  admins: typeof admins;
   alerts: typeof alerts;
   crons: typeof crons;
   demoRequests: typeof demoRequests;
@@ -43,6 +46,7 @@ declare const fullApi: ApiFromModules<{
   "lib/taxonomy": typeof lib_taxonomy;
   "lib/text": typeof lib_text;
   "lib/towns": typeof lib_towns;
+  nodes: typeof nodes;
   notifications: typeof notifications;
   roadmapIdeas: typeof roadmapIdeas;
   seedSources: typeof seedSources;
