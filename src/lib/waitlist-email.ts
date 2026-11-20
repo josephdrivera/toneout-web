@@ -259,13 +259,20 @@ export function buildAndroidLaunchEmail(email: string): string {
       <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
         ${row("Live scanner feeds", "Police, fire &amp; EMS by state, plus feeds near you by GPS.", "10px 10px 0 0", "border:1px solid #16171f;")}
         ${row("ToneOut Network", "Every live channel from our Glastonbury node, straight in the app.", "0", side)}
-        ${row("Tone Alerts", "A push the moment Glastonbury is toned out. All-Call alerts are free; company alerts are a one-time unlock. Does not replace your pager.", "0", side)}
+        ${row("Tone Alerts", "A push the moment Glastonbury is toned out. All-Call alerts are free; company alerts are a one-time purchase per town. Does not replace your pager.", "0", side)}
+        ${row("Standby", "Listening to music when the tones drop? Your music lowers and live dispatch plays, then your music comes back.", "0", side)}
         ${row("Dual Listen", "Two feeds at once, each with its own volume. One-time unlock, no subscription.", "0", side)}
         ${row("No ads. No account.", "Dark, clean, and nothing tracking you.", "0 0 10px 10px", "border:1px solid #16171f;")}
       </table>
 
       <p style="margin:24px 0 0;font-size:12px;color:#6a6b78;text-align:center;line-height:1.65;">
         On iPhone? ToneOut is on the App Store too.
+      </p>
+
+      <p style="margin:16px 0 0;font-size:12px;color:#6a6b78;text-align:center;line-height:1.65;">
+        The ToneOut Network is one node today, in Glastonbury, CT. We&rsquo;re working to bring it to more towns and states.
+        Want a node at your firehouse or your home?
+        <a href="https://toneout.app/support#firehouse" style="color:#4878a8;text-decoration:underline;">Tell us here</a>.
       </p>
 
       <p style="margin:20px 0 0;font-size:11px;color:#50515f;text-align:center;line-height:1.6;">

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import NetworkStatusIndicator from "./NetworkStatusIndicator";
 
 const links = [
+  { href: "/news", label: "News" },
   { href: "/updates", label: "Updates" },
   { href: "/roadmap", label: "Roadmap" },
   { href: "/privacy", label: "Privacy" },
