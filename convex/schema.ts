@@ -174,4 +174,23 @@ export default defineSchema({
     type: v.string(),
     detail: v.optional(v.string()),
   }).index("by_nodeId_at", ["nodeId", "at"]),
+
+  // Running project log and the list of places admins need. Kept in the
+  // database, not in this (public) repository. Never store secrets here.
+  projectLog: defineTable({
+    date: v.string(), // YYYY-MM-DD, the day the work happened
+    area: v.string(),
+    title: v.string(),
+    body: v.string(),
+    author: v.string(),
+    createdAt: v.number(),
+  }).index("by_date", ["date", "createdAt"]),
+
+  adminLinks: defineTable({
+    group: v.string(),
+    label: v.string(),
+    url: v.string(),
+    note: v.optional(v.string()),
+    order: v.number(),
+  }).index("by_group", ["group", "order"]),
 });

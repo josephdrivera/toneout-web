@@ -47,6 +47,21 @@ export default function AdminHeader({
         <Link href="/admin" className={tabClass(pathname === "/admin")}>
           Nodes
         </Link>
+        <Link
+          href="/admin/inbox"
+          className={tabClass(pathname === "/admin/inbox")}
+        >
+          Inbox
+        </Link>
+        <Link href="/admin/log" className={tabClass(pathname === "/admin/log")}>
+          Log
+        </Link>
+        <Link
+          href="/admin/links"
+          className={tabClass(pathname === "/admin/links")}
+        >
+          Links
+        </Link>
         {isOwner && (
           <Link
             href="/admin/people"
