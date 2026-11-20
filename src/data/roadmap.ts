@@ -95,7 +95,7 @@ export const roadmap: RoadmapItem[] = [
     id: "tone-alerts",
     title: "Tone Alerts",
     description:
-      `A push notification the moment your department is toned out — ToneOut listens to Glastonbury dispatch 24/7 and detects real Quick Call II two-tone pages. All-Call alerts are free; individual company alerts are ${ANDROID_LIVE ? "a one-time purchase per town, not a subscription" : "coming as a one-time purchase per town, not a subscription"}. ${ANDROID_LIVE ? "Live on iOS and Android." : "Live on iOS since v1.1, and on Android from launch day."} Does not replace your pager.`,
+      `A push notification the moment your department is toned out — ToneOut Network nodes listen to dispatch 24/7 and detect real Quick Call II two-tone pages, so alerts work in towns the network covers. All-Call alerts are free; individual company alerts are ${ANDROID_LIVE ? "a one-time purchase per town, not a subscription" : "coming as a one-time purchase per town, not a subscription"}. ${ANDROID_LIVE ? "Live on iOS and Android." : "Live on iOS since v1.1, and on Android from launch day."} Does not replace your pager.`,
     status: "shipped",
   },
 
@@ -129,7 +129,7 @@ export const roadmap: RoadmapItem[] = [
     id: "more-nodes",
     title: "More ToneOut Network nodes",
     description:
-      "Today the ToneOut Network is one node in Glastonbury, CT. We're working hard to push it across more towns and states. If you'd host a node at your firehouse, or at your house near a fire station, police station, or radio tower, reach out through the form on our Support page.",
+      "The ToneOut Network is just getting started, and we're working hard to push it across more towns and states. If you'd host a node at your firehouse, or at your house near a fire station, police station, or radio tower, reach out through the form on our Support page.",
     status: "in-progress",
   },
 

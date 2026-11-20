@@ -208,9 +208,9 @@ export default function Support() {
             </div>
 
             <P>
-              Right now the ToneOut Network is one node, in Glastonbury, CT.
-              We are working hard to push it across more towns and more
-              states, and that takes people willing to host a node.
+              The ToneOut Network is just getting started. We are working
+              hard to push it across more towns and more states, and that
+              takes people willing to host a node.
             </P>
 
             <P>

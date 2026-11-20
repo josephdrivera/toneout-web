@@ -15,7 +15,7 @@ const features = [
     ),
     iconBg: "bg-fire/10 text-fire",
     title: "Tone Alerts",
-    desc: `A push notification the moment your department is toned out. Detects real Quick Call II two-tone pages from Glastonbury dispatch. All-Call free; ${ANDROID_LIVE ? "company alerts are a one-time purchase per town" : "company alerts coming soon as a one-time purchase"}. Does not replace your pager.`,
+    desc: `A push notification the moment your department is toned out. Detects real Quick Call II two-tone pages in towns on the ToneOut Network. All-Call free; ${ANDROID_LIVE ? "company alerts are a one-time purchase per town" : "company alerts coming soon as a one-time purchase"}. Does not replace your pager.`,
   },
   {
     paths: <path d="M2 12h4l3-9 4 18 3-9h4" />,
