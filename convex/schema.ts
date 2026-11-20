@@ -150,6 +150,31 @@ export default defineSchema({
     createdAt: v.number(),
     enrolledAt: v.optional(v.number()),
     lastSeenAt: v.optional(v.number()),
+    // Audio settings chosen in the admin panel; the node downloads them when
+    // configVersion changes.
+    capture: v.optional(
+      v.object({
+        name: v.string(),
+        mount: v.string(),
+        inputType: v.union(v.literal("alsa"), v.literal("rtl_fm"), v.literal("file")),
+        device: v.optional(v.string()),
+        frequencyMhz: v.optional(v.number()),
+        gain: v.optional(v.number()),
+        path: v.optional(v.string()),
+        squelchOpen: v.optional(v.number()),
+        squelchClose: v.optional(v.number()),
+        record: v.optional(v.boolean()),
+        tones: v.array(
+          v.object({
+            department: v.string(),
+            label: v.string(),
+            toneA: v.number(),
+            toneB: v.number(),
+          }),
+        ),
+      }),
+    ),
+    configVersion: v.optional(v.number()),
     health: v.optional(
       v.object({
         version: v.optional(v.string()),

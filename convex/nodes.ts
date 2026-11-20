@@ -22,6 +22,27 @@ const healthValidator = v.object({
   message: v.optional(v.string()),
 });
 
+const captureValidator = v.object({
+  name: v.string(),
+  mount: v.string(),
+  inputType: v.union(v.literal("alsa"), v.literal("rtl_fm"), v.literal("file")),
+  device: v.optional(v.string()),
+  frequencyMhz: v.optional(v.number()),
+  gain: v.optional(v.number()),
+  path: v.optional(v.string()),
+  squelchOpen: v.optional(v.number()),
+  squelchClose: v.optional(v.number()),
+  record: v.optional(v.boolean()),
+  tones: v.array(
+    v.object({
+      department: v.string(),
+      label: v.string(),
+      toneA: v.number(),
+      toneB: v.number(),
+    }),
+  ),
+});
+
 const MAX_EVENTS_PER_NODE = 20;
 
 export const adminOverview = query({
@@ -57,6 +78,8 @@ export const adminOverview = query({
         enrolledAt: node.enrolledAt,
         lastSeenAt: node.lastSeenAt,
         health: node.health,
+        capture: node.capture,
+        configVersion: node.configVersion ?? 0,
         hasClaim: Boolean(node.claimCodeHash),
         claimExpiresAt: node.claimExpiresAt,
         events: events.map((event) => ({
@@ -341,5 +364,119 @@ export const verifyKey = query({
       town: node.town,
       status: node.status,
     };
+  },
+});
+
+/**
+ * Saves (or clears) a node's audio settings and bumps its config version, so
+ * the node picks the change up at its next check-in.
+ */
+export const setCapture = mutation({
+  args: {
+    secret: v.string(),
+    nodeId: v.id("nodes"),
+    capture: v.union(captureValidator, v.null()),
+    actor: v.string(),
+  },
+  returns: v.boolean(),
+  handler: async (ctx, args) => {
+    assertEditorSecret(args.secret);
+    const node = await ctx.db.get(args.nodeId);
+    if (!node) return false;
+    await ctx.db.patch(args.nodeId, {
+      capture: args.capture ?? undefined,
+      configVersion: (node.configVersion ?? 0) + 1,
+    });
+    await ctx.db.insert("nodeEvents", {
+      nodeId: args.nodeId,
+      at: Date.now(),
+      type: args.capture ? "audio settings saved" : "audio settings cleared",
+      detail: `by ${args.actor}`,
+    });
+    return true;
+  },
+});
+
+/** A node asks for its current audio settings. */
+export const getConfig = query({
+  args: { secret: v.string(), keyHash: v.string() },
+  returns: v.union(
+    v.object({
+      status: v.union(
+        v.literal("pending"),
+        v.literal("active"),
+        v.literal("disabled"),
+      ),
+      version: v.number(),
+      capture: v.union(captureValidator, v.null()),
+    }),
+    v.null(),
+  ),
+  handler: async (ctx, args) => {
+    assertEditorSecret(args.secret);
+    const node = await ctx.db
+      .query("nodes")
+      .withIndex("by_keyHash", (q) => q.eq("keyHash", args.keyHash))
+      .unique();
+    if (!node) return null;
+    return {
+      status: node.status,
+      version: node.configVersion ?? 0,
+      capture: node.capture ?? null,
+    };
+  },
+});
+
+/**
+ * Health check-in that also tells the node which settings version is current.
+ * (The older `heartbeat` stays so a deploy never breaks running nodes.)
+ */
+export const checkin = mutation({
+  args: {
+    secret: v.string(),
+    keyHash: v.string(),
+    health: healthValidator,
+  },
+  returns: v.object({
+    result: v.union(
+      v.literal("ok"),
+      v.literal("disabled"),
+      v.literal("unknown"),
+    ),
+    configVersion: v.number(),
+  }),
+  handler: async (ctx, args) => {
+    assertEditorSecret(args.secret);
+    const node = await ctx.db
+      .query("nodes")
+      .withIndex("by_keyHash", (q) => q.eq("keyHash", args.keyHash))
+      .unique();
+    if (!node) return { result: "unknown" as const, configVersion: 0 };
+    if (node.status === "disabled") {
+      return { result: "disabled" as const, configVersion: 0 };
+    }
+
+    const now = Date.now();
+    const wasOffline =
+      !node.lastSeenAt || now - node.lastSeenAt > 5 * 60 * 1000;
+    await ctx.db.patch(node._id, { lastSeenAt: now, health: args.health });
+
+    if (wasOffline) {
+      await ctx.db.insert("nodeEvents", {
+        nodeId: node._id,
+        at: now,
+        type: "online",
+        detail: args.health.network,
+      });
+      const events = await ctx.db
+        .query("nodeEvents")
+        .withIndex("by_nodeId_at", (q) => q.eq("nodeId", node._id))
+        .order("desc")
+        .take(MAX_EVENTS_PER_NODE + 20);
+      for (const event of events.slice(MAX_EVENTS_PER_NODE)) {
+        await ctx.db.delete(event._id);
+      }
+    }
+    return { result: "ok" as const, configVersion: node.configVersion ?? 0 };
   },
 });

@@ -2,6 +2,7 @@
 
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import AudioSettings, { type CaptureSettings } from "./AudioSettings";
 
 type Health = {
   version?: string;
@@ -31,6 +32,8 @@ type NodeRow = {
   claimExpiresAt?: number;
   events: Array<{ at: number; type: string; detail?: string }>;
   streams?: Array<{ id: string; name: string; url: string; listeners: number }>;
+  capture?: CaptureSettings;
+  configVersion?: number;
 };
 
 type RequestRow = {
@@ -128,6 +131,7 @@ export default function NodeDashboard() {
   const [form, setForm] = useState<NewNode | null>(null);
   const [busy, setBusy] = useState(false);
   const [confirming, setConfirming] = useState<string | null>(null);
+  const [editingAudio, setEditingAudio] = useState<string | null>(null);
 
   const refresh = useCallback(async () => {
     try {
@@ -441,6 +445,19 @@ export default function NodeDashboard() {
                   </dl>
                 )}
 
+                {node.capture && (
+                  <p className="mt-3 text-xs text-textBody">
+                    Audio: {node.capture.name} ·{" "}
+                    {node.capture.inputType === "alsa"
+                      ? "scanner jack"
+                      : node.capture.inputType === "rtl_fm"
+                        ? `${node.capture.frequencyMhz} MHz`
+                        : "test recording"}{" "}
+                    · {node.capture.tones.length} tone pair
+                    {node.capture.tones.length === 1 ? "" : "s"}
+                  </p>
+                )}
+
                 {node.streams && node.streams.length > 0 && (
                   <div className="mt-3 rounded-lg border border-border bg-background px-3 py-2">
                     <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-textMuted">
@@ -535,6 +552,18 @@ export default function NodeDashboard() {
                         type="button"
                         disabled={busy}
                         className={smallButton}
+                        onClick={() =>
+                          setEditingAudio(
+                            editingAudio === node._id ? null : node._id,
+                          )
+                        }
+                      >
+                        Audio settings
+                      </button>
+                      <button
+                        type="button"
+                        disabled={busy}
+                        className={smallButton}
                         onClick={() => void reissue(node)}
                       >
                         New claim code
@@ -554,6 +583,24 @@ export default function NodeDashboard() {
                     </>
                   )}
                 </div>
+
+                {editingAudio === node._id && (
+                  <AudioSettings
+                    key={`${node._id}-${node.configVersion ?? 0}`}
+                    nodeId={node._id}
+                    town={node.town}
+                    defaultInput={node.inputType === "sdr" ? "rtl_fm" : "alsa"}
+                    current={node.capture}
+                    onSaved={() => {
+                      setEditingAudio(null);
+                      setNotice(
+                        "Audio settings saved. The node will apply them at its next check-in.",
+                      );
+                      void refresh();
+                    }}
+                    onClose={() => setEditingAudio(null)}
+                  />
+                )}
               </article>
             );
           })}

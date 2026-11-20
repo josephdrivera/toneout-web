@@ -20,7 +20,7 @@ function str(value: unknown, max: number): string | undefined {
  *   Authorization: Bearer <nodeKey>
  *   POST { version, uptimeSeconds, cpuTempC, audioLevel, lastToneAt,
  *          wifiSignal, network, channels, message }   (all optional)
- *   -> 200 { ok: true }
+ *   -> 200 { ok: true, configVersion }
  *   -> 401 unknown key, 403 license disabled (the node should stop streaming)
  */
 export async function POST(request: Request) {
@@ -54,16 +54,16 @@ export async function POST(request: Request) {
       Object.entries(health).filter(([, value]) => value !== undefined),
     );
 
-    const result = await convex.mutation(api.nodes.heartbeat, {
-      secret,
-      keyHash: sha256(nodeKey),
-      health: clean,
-    });
+    const { result, configVersion } = await convex.mutation(
+      api.nodes.checkin,
+      { secret, keyHash: sha256(nodeKey), health: clean },
+    );
     if (result === "unknown") return badRequest("Unknown node key.", 401);
     if (result === "disabled") {
       return badRequest("This node's license is disabled.", 403);
     }
-    return NextResponse.json({ ok: true });
+    // configVersion lets the node notice new audio settings.
+    return NextResponse.json({ ok: true, configVersion });
   } catch {
     return badRequest("Something went wrong.", 500);
   }
