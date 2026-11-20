@@ -30,6 +30,7 @@ type NodeRow = {
   hasClaim: boolean;
   claimExpiresAt?: number;
   events: Array<{ at: number; type: string; detail?: string }>;
+  streams?: Array<{ id: string; name: string; url: string; listeners: number }>;
 };
 
 type RequestRow = {
@@ -438,6 +439,33 @@ export default function NodeDashboard() {
                       </div>
                     ))}
                   </dl>
+                )}
+
+                {node.streams && node.streams.length > 0 && (
+                  <div className="mt-3 rounded-lg border border-border bg-background px-3 py-2">
+                    <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-textMuted">
+                      Streaming through the hub
+                    </p>
+                    {node.streams.map((stream) => (
+                      <p
+                        key={stream.id}
+                        className="flex items-center justify-between gap-3 text-xs"
+                      >
+                        <a
+                          href={stream.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="min-w-0 truncate text-textSecondary hover:text-accent"
+                        >
+                          <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-ems align-middle" />
+                          {stream.name} ↗
+                        </a>
+                        <span className="shrink-0 text-textMuted">
+                          {stream.listeners} listening
+                        </span>
+                      </p>
+                    ))}
+                  </div>
                 )}
 
                 {health.message && (

@@ -13,6 +13,38 @@ import { badRequest, field } from "../../../../lib/formApi";
 
 export const dynamic = "force-dynamic";
 
+const HUB_STREAMS_URL =
+  process.env.HUB_STREAMS_URL ?? "https://hub.toneout.app/api/streams";
+
+type HubStream = {
+  id: string;
+  name: string;
+  url: string;
+  listeners: number;
+  started?: string;
+  node_id?: string | null;
+};
+
+/**
+ * What each node is streaming through the hub right now. Best effort: if the
+ * hub does not answer quickly, the page simply shows no stream information.
+ */
+async function hubStreams(): Promise<HubStream[] | null> {
+  try {
+    const response = await fetch(HUB_STREAMS_URL, {
+      cache: "no-store",
+      signal: AbortSignal.timeout(3000),
+    });
+    if (!response.ok) return null;
+    const data: unknown = await response.json();
+    if (typeof data !== "object" || data === null) return null;
+    const streams = (data as { streams?: unknown }).streams;
+    return Array.isArray(streams) ? (streams as HubStream[]) : null;
+  } catch {
+    return null;
+  }
+}
+
 export async function GET() {
   const admin = await currentAdmin();
   if (!admin) return badRequest("Unauthorized", 401);
@@ -20,9 +52,29 @@ export async function GET() {
   const convex = convexClient();
   if (!secret || !convex) return badRequest("Admin is not configured.", 503);
   try {
-    const overview = await convex.query(api.nodes.adminOverview, { secret });
+    const [overview, streams] = await Promise.all([
+      convex.query(api.nodes.adminOverview, { secret }),
+      hubStreams(),
+    ]);
+    const nodes = overview.nodes.map((node) => ({
+      ...node,
+      streams: (streams ?? [])
+        .filter((stream) => stream.node_id === node._id)
+        .map((stream) => ({
+          id: String(stream.id),
+          name: String(stream.name ?? stream.id),
+          url: String(stream.url ?? ""),
+          listeners: Number(stream.listeners) || 0,
+        })),
+    }));
     return NextResponse.json(
-      { ...overview, now: Date.now(), me: { name: admin.name, role: admin.role } },
+      {
+        ...overview,
+        nodes,
+        hubReachable: streams !== null,
+        now: Date.now(),
+        me: { name: admin.name, role: admin.role },
+      },
       { headers: { "Cache-Control": "no-store" } },
     );
   } catch {
