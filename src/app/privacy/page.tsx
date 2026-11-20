@@ -96,7 +96,8 @@ export default function PrivacyPolicy() {
             </P>
             <P>
               <B>Purchase Information:</B>{" "}If you purchase premium features, the
-              transaction is handled entirely by Apple. We do not receive or
+              transaction is handled entirely by Apple on iPhone or by Google
+              Play on Android. We do not receive or
               store any payment information.
             </P>
             <P>

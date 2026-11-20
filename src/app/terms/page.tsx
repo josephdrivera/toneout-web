@@ -134,8 +134,9 @@ export default function TermsOfUse() {
 
             <P>
               ToneOut offers optional premium features as one time in app
-              purchases through Apple. All purchases are governed by
-              Apple&apos;s terms and refund policies.
+              purchases through Apple on iPhone and through Google Play on
+              Android. Purchases are governed by that store&apos;s terms and
+              refund policies.
             </P>
 
             <H2>Intellectual Property</H2>

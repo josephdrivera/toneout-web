@@ -256,9 +256,36 @@ export default function Support() {
             <H2>Refunds</H2>
 
             <P>
-              All purchases are processed by Apple. Visit{" "}
-              <span className="text-accent">reportaproblem.apple.com</span> to
-              request a refund.
+              <span className="font-semibold text-textSecondary">iPhone:</span>{" "}
+              purchases are processed by Apple. Visit{" "}
+              <a
+                href="https://reportaproblem.apple.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent hover:text-accent/80"
+              >
+                reportaproblem.apple.com
+              </a>{" "}
+              to request a refund.
+            </P>
+
+            <P>
+              <span className="font-semibold text-textSecondary">Android:</span>{" "}
+              purchases are processed by Google Play. Request a refund from
+              your{" "}
+              <a
+                href="https://play.google.com/store/account/orderhistory"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent hover:text-accent/80"
+              >
+                Google Play order history
+              </a>
+              . If Google Play will not refund it, send us a message through{" "}
+              <a href="#feedback" className="text-accent hover:text-accent/80">
+                Requests and Feedback
+              </a>{" "}
+              with the email on your Google account and we will sort it out.
             </P>
           </div>
         </div>
