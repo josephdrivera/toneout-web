@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CONTACT_EMAIL } from "../../lib/links";
+import { ANDROID_LIVE, PLAY_STORE_URL } from "../../lib/links";
+import FeedbackForm from "../../components/FeedbackForm";
+import DemoRequestForm from "../../components/DemoRequestForm";
 
 export const metadata: Metadata = {
   title: "Support | ToneOut",
@@ -64,7 +66,7 @@ export default function Support() {
             <Q>How does ToneOut work?</Q>
             <P>
               ToneOut streams publicly available police, fire, and EMS audio
-              feeds over the internet. Today those streams come from{" "}
+              feeds over the internet. Live streams come from{" "}
               <a
                 href="https://www.broadcastify.com/"
                 target="_blank"
@@ -73,10 +75,26 @@ export default function Support() {
               >
                 Broadcastify
               </a>
-              . Coming soon: our own ToneOut network for listeners who want it
-              straight from us. ToneOut does not operate or control third party
-              streams and is not responsible for their availability. ToneOut does
-              not directly receive radio frequencies.
+              {" "}and from our own ToneOut Network. Today that is one
+              receiver node in Glastonbury, CT, and we are working to bring
+              nodes to more towns and states (
+              <a href="#firehouse" className="text-accent hover:text-accent/80">
+                you can host one
+              </a>
+              ). On iPhone, ToneOut also plays recorded calls
+              from{" "}
+              <a
+                href="https://openmhz.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent hover:text-accent/80"
+              >
+                OpenMHz
+              </a>
+              , which archives trunked radio systems moments after each call
+              happens. OpenMHz is coming to Android in a later update. ToneOut
+              does not operate or control third party streams and is not
+              responsible for their availability.
             </P>
 
             <Q>What is Dual Listen?</Q>
@@ -97,15 +115,40 @@ export default function Support() {
             </P>
 
             <Q>Is ToneOut available on Android?</Q>
-            <P>
-              ToneOut is launching on iOS first. An Android version is planned
-              for later in 2026. Join the waitlist to stay updated.
-            </P>
+            {ANDROID_LIVE ? (
+              <P>
+                Yes. ToneOut for Android is a free download on{" "}
+                <a
+                  href={PLAY_STORE_URL}
+                  target="_blank"
+                  rel="noopener"
+                  className="text-accent underline-offset-2 hover:underline"
+                >
+                  Google Play
+                </a>
+                , for Android 10 and later. It is a native Android app with
+                the same scanner feeds, ToneOut Network channels, saved feeds,
+                Tone Alerts, and Dual Listen as iPhone.
+              </P>
+            ) : (
+              <P>
+                Almost. ToneOut for Android is built and Google has approved
+                it for the Play Store; the public release is being finalized
+                now. Join the list on the{" "}
+                <Link
+                  href="/#android"
+                  className="text-accent underline-offset-2 hover:underline"
+                >
+                  homepage
+                </Link>{" "}
+                and we&apos;ll email you once, the day it goes live.
+              </P>
+            )}
 
             <Q>Why is a feed offline or unavailable?</Q>
             <P>
-              Feeds come from Broadcastify and (eventually) ToneOut&apos;s
-              network. Third party streams may go offline due to equipment issues,
+              Feeds come from Broadcastify, OpenMHz, and the ToneOut
+              Network. Third party streams may go offline due to equipment issues,
               internet outages, or maintenance on their providers&apos; side.
               ToneOut has no control over individual stream availability. Try
               again later or search for an alternate feed in your area.
@@ -137,43 +180,64 @@ export default function Support() {
 
             <Q>How do I report a bug or send feedback?</Q>
             <P>
-              During the beta, use Apple&apos;s TestFlight: open the TestFlight
-              app, select ToneOut, then tap{" "}
-              <span className="font-semibold text-textSecondary">
-                Send Beta Feedback
-              </span>
-              . You can attach a screenshot, describe what happened, and submit.
-              That is the best way to reach us about crashes, audio issues, or
-              anything that feels off.
+              Use the{" "}
+              <a href="#feedback" className="text-accent hover:text-accent/80">
+                form below
+              </a>
+              . Tell us what happened and which phone you are on. We read
+              every message.
             </P>
 
-            <H2>Contact Us</H2>
+            <div id="feedback" className="scroll-mt-24">
+              <H2>Requests and Feedback</H2>
+            </div>
 
             <P>
-              While ToneOut is in beta, please use{" "}
+              Send us your requests and the things you would like to see more
+              of: a feed, a town, a feature. Feedback and bug reports go here
+              too. It comes straight to us. Leave your email if you want a
+              reply.
+            </P>
+
+            <div className="mb-4">
+              <FeedbackForm />
+            </div>
+
+            <div id="firehouse" className="scroll-mt-24">
+              <H2>Host a ToneOut Node: Firehouses and Homes</H2>
+            </div>
+
+            <P>
+              Right now the ToneOut Network is one node, in Glastonbury, CT.
+              We are working hard to push it across more towns and more
+              states, and that takes people willing to host a node.
+            </P>
+
+            <P>
               <span className="font-semibold text-textSecondary">
-                Send Beta Feedback
+                Fire departments:
               </span>{" "}
-              in TestFlight (screenshots and notes welcome). We read every
-              report.
+              want Tone Alerts for your firehouse? We are looking for
+              departments to beta test a node at their station. For the first
+              firehouses, ToneOut covers the cost of the node, the install,
+              and managing it.
             </P>
 
-            <H2>Fire Departments: Host a ToneOut Node</H2>
+            <P>
+              <span className="font-semibold text-textSecondary">
+                At your house:
+              </span>{" "}
+              you do not need to be a fire department. If you live close
+              enough to a fire station, a police station, or a radio tower to
+              pick up its signal, a node at your home can put your town on
+              the network. Reach out and we will talk it through.
+            </P>
 
             <P>
-              Want Tone Alerts for your firehouse? We are looking for
-              departments to beta test a ToneOut node at their station. For
-              the first firehouses, ToneOut covers the cost of the node, the
-              install, and managing it. Email{" "}
-              <a
-                href={`mailto:${CONTACT_EMAIL}?subject=ToneOut%20node%20for%20our%20firehouse`}
-                className="text-accent underline-offset-2 hover:underline"
-              >
-                {CONTACT_EMAIL}
-              </a>{" "}
-              with your department and town. This is a beta test and a
-              supplement: ToneOut does not replace your pager, your dispatch,
-              or response apps like IamResponding or First Due.{" "}
+              A node is a small receive-only radio. It cannot transmit. This
+              is a beta test and a supplement: ToneOut does not replace your
+              pager, your dispatch, or response apps like IamResponding or
+              First Due.{" "}
               <a
                 href="/ToneOut-for-Your-Firehouse.pdf"
                 target="_blank"
@@ -184,6 +248,10 @@ export default function Support() {
               </a>
               .
             </P>
+
+            <div className="mb-4">
+              <DemoRequestForm />
+            </div>
 
             <H2>Refunds</H2>
 

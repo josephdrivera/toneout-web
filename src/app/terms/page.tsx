@@ -68,15 +68,24 @@ export default function TermsOfUse() {
               >
                 Broadcastify
               </a>
-              {" "}
-              and, in the future, ToneOut&apos;s own network. ToneOut does not
+
+              ,{" "}
+              <a
+                href="https://openmhz.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent hover:text-accent/80"
+              >
+                OpenMHz
+              </a>
+              , and ToneOut&apos;s own network. ToneOut does not
               operate, control, or guarantee the availability of third party
               streams. ToneOut also offers Push to Talk functionality using
               Apple&apos;s PushToTalk framework for walkie talkie style
               communication between users. ToneOut does not directly intercept,
-              decode, or receive radio frequencies. The App is currently
-              available on iOS. An Android version is planned for a future
-              release.
+              decode, or receive radio frequencies. The App is available
+              on iOS and Android. Some features and feed sources differ
+              between the two.
             </P>
 
             <H2>Acceptable Use</H2>
@@ -141,8 +150,8 @@ export default function TermsOfUse() {
             <P>
               ToneOut is provided &ldquo;as is&rdquo; without warranties of any
               kind. Audio streams are sourced from third party providers
-              including Broadcastify; ToneOut&apos;s own network may
-              be offered in the future. We do not guarantee feed availability,
+              including Broadcastify and OpenMHz, and from ToneOut&apos;s
+              own network. We do not guarantee feed availability,
               accuracy, continuity, or Push to Talk connectivity. ToneOut is not
               responsible for streams going offline, being delayed, or becoming
               unavailable. Stream availability depends entirely on third party

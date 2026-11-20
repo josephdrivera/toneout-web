@@ -1,6 +1,8 @@
 import Link from "next/link";
 import WaitlistForm from "../components/WaitlistForm";
 import AppStoreButton from "../components/AppStoreButton";
+import GooglePlayButton from "../components/GooglePlayButton";
+import { ANDROID_LIVE } from "../lib/links";
 import { updates } from "../data/updates";
 
 const features = [
@@ -13,7 +15,7 @@ const features = [
     ),
     iconBg: "bg-fire/10 text-fire",
     title: "Tone Alerts",
-    desc: "A push notification the moment your department is toned out. Detects real Quick Call II two-tone pages from Glastonbury dispatch. All-Call free; company alerts coming soon. Does not replace your pager.",
+    desc: `A push notification the moment your department is toned out. Detects real Quick Call II two-tone pages from Glastonbury dispatch. All-Call free; ${ANDROID_LIVE ? "company alerts are a one-time purchase per town" : "company alerts coming soon as a one-time purchase"}. Does not replace your pager.`,
   },
   {
     paths: <path d="M2 12h4l3-9 4 18 3-9h4" />,
@@ -90,8 +92,8 @@ const features = [
       </>
     ),
     iconBg: "bg-law/10 text-law",
-    title: "Broadcastify & more",
-    desc: "Live feeds from Broadcastify. Coming soon: our very own ToneOut network.",
+    title: "Three feed sources",
+    desc: "Live streams from Broadcastify, recorded calls from OpenMHz (iPhone now, Android later), and our own ToneOut Network.",
   },
 ];
 
@@ -235,17 +237,25 @@ export default function Home() {
           </p>
 
           {/* Primary CTA — download */}
-          <div className="mb-4 flex justify-center">
+          <div
+            id={ANDROID_LIVE ? "android" : undefined}
+            className="mb-4 flex scroll-mt-24 flex-wrap justify-center gap-3"
+          >
             <AppStoreButton />
+            {ANDROID_LIVE && <GooglePlayButton />}
           </div>
           <p className="mb-9 text-[11px] text-textHint">
-            Free on iPhone. iOS 17 and later.
+            {ANDROID_LIVE
+              ? "Free on iPhone and Android. iOS 17 and later, Android 10 and later."
+              : "Free on iPhone. iOS 17 and later."}
           </p>
 
-          {/* Secondary — Android waitlist */}
-          <div id="android" className="scroll-mt-24">
-            <WaitlistForm />
-          </div>
+          {/* Secondary — Android waitlist, until the Play Store launch */}
+          {!ANDROID_LIVE && (
+            <div id="android" className="scroll-mt-24">
+              <WaitlistForm />
+            </div>
+          )}
 
           {/* Social proof */}
           <div className="mt-6 flex items-center justify-center gap-2">

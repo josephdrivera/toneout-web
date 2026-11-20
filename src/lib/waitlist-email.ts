@@ -208,6 +208,87 @@ export function buildWaitlistEmail(email: string): string {
   return wrap("Welcome to the ToneOut Waitlist", card);
 }
 
+const PLAY_STORE_URL =
+  "https://play.google.com/store/apps/details?id=app.toneout.android";
+
+/** The one launch email promised to the Android waitlist. */
+export function buildAndroidLaunchEmail(email: string): string {
+  const row = (title: string, detail: string, radius: string, borders: string) => `
+        <tr>
+          <td style="padding:12px 16px;background-color:#111219;${borders}border-radius:${radius};">
+            <p style="margin:0;font-size:13px;font-weight:600;color:#d0d1da;">${title}</p>
+            <p style="margin:2px 0 0;font-size:11px;color:#6a6b78;line-height:1.5;">${detail}</p>
+          </td>
+        </tr>`;
+  const side = "border-left:1px solid #16171f;border-right:1px solid #16171f;";
+
+  const card = `
+<tr>
+  <td style="background-color:#0f1018;border:1px solid #1a1b24;border-radius:16px;overflow:hidden;">
+
+    <div style="height:3px;background:linear-gradient(90deg,#bf5a3a 0%,#c89b3c 100%);"></div>
+
+    <div style="padding:40px 32px 36px;">
+
+      <p style="margin:0 0 6px;font-size:22px;font-weight:800;color:#e4e5ed;text-align:center;letter-spacing:-0.5px;">
+        ToneOut for Android is live
+      </p>
+      <p style="margin:0 0 28px;font-size:14px;color:#8a8b97;text-align:center;line-height:1.65;">
+        You asked us to tell you the day it landed on Google Play.<br />
+        Today&rsquo;s the day. It&rsquo;s a <strong style="color:#d0d1da;">free download</strong>.
+      </p>
+
+      <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+        <tr>
+          <td align="center" style="padding-bottom:28px;">
+            <a href="${PLAY_STORE_URL}" style="display:inline-block;background-color:#bf5a3a;border-radius:10px;padding:14px 28px;font-size:14px;font-weight:700;color:#ffffff;text-decoration:none;">
+              Get ToneOut on Google Play
+            </a>
+          </td>
+        </tr>
+      </table>
+
+      <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin-bottom:24px;">
+        <tr><td style="border-top:1px solid #1a1b24;font-size:0;line-height:0;">&nbsp;</td></tr>
+      </table>
+
+      <p style="margin:0 0 16px;font-size:10px;font-weight:700;color:#50515f;letter-spacing:0.12em;text-align:center;">
+        WHAT&rsquo;S IN IT
+      </p>
+
+      <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+        ${row("Live scanner feeds", "Police, fire &amp; EMS by state, plus feeds near you by GPS.", "10px 10px 0 0", "border:1px solid #16171f;")}
+        ${row("ToneOut Network", "Every live channel from our Glastonbury node, straight in the app.", "0", side)}
+        ${row("Tone Alerts", "A push the moment Glastonbury is toned out. All-Call alerts are free; company alerts are a one-time unlock. Does not replace your pager.", "0", side)}
+        ${row("Dual Listen", "Two feeds at once, each with its own volume. One-time unlock, no subscription.", "0", side)}
+        ${row("No ads. No account.", "Dark, clean, and nothing tracking you.", "0 0 10px 10px", "border:1px solid #16171f;")}
+      </table>
+
+      <p style="margin:24px 0 0;font-size:12px;color:#6a6b78;text-align:center;line-height:1.65;">
+        On iPhone? ToneOut is on the App Store too.
+      </p>
+
+      <p style="margin:20px 0 0;font-size:11px;color:#50515f;text-align:center;line-height:1.6;">
+        ToneOut is not an emergency service and does not replace your pager or official dispatch.
+        Scanner audio can be delayed. Always call 911 in an emergency.
+      </p>
+
+    </div>
+  </td>
+</tr>
+
+<tr>
+  <td style="padding:20px 0 0;text-align:center;">
+    <p style="margin:0;font-size:11px;color:#3e3f50;line-height:1.5;">
+      Sent to <span style="color:#50515f;">${escapeHtml(email)}</span> because you joined the ToneOut Android launch list.<br />
+      This is the one email we promised. You won&rsquo;t get another from this list.
+    </p>
+  </td>
+</tr>`;
+
+  return wrap("ToneOut for Android is live on Google Play", card);
+}
+
 function escapeHtml(value: string): string {
   return value
     .replace(/&/g, "&amp;")
@@ -377,4 +458,57 @@ export function buildAdminNotificationEmail(
 </tr>`;
 
   return wrap("New ToneOut Waitlist Signup", card);
+}
+
+
+/**
+ * Admin notification for a website form submission: a badge, then one
+ * labelled row per field. Empty values are skipped.
+ */
+export function buildSubmissionNotificationEmail(
+  badge: string,
+  rows: Array<{ label: string; value?: string }>,
+): string {
+  const time = new Date().toLocaleString("en-US", {
+    timeZone: "America/New_York",
+    dateStyle: "medium",
+    timeStyle: "short",
+  });
+
+  const rowsHtml = [...rows, { label: "Time", value: `${time} ET` }]
+    .filter((row) => row.value && row.value.trim())
+    .map(
+      (row, i) => `
+        ${i > 0 ? `<tr><td style="padding:0 20px;"><div style="border-top:1px solid #1a1b24;"></div></td></tr>` : ""}
+        <tr>
+          <td style="padding:14px 20px;">
+            <p style="margin:0 0 6px;font-size:10px;font-weight:700;color:#3e3f50;letter-spacing:0.1em;">${escapeHtml(row.label.toUpperCase())}</p>
+            <p style="margin:0;font-size:14px;font-weight:500;color:#e4e5ed;line-height:1.6;">${escapeHtml(row.value ?? "").replace(/\n/g, "<br />")}</p>
+          </td>
+        </tr>`,
+    )
+    .join("");
+
+  const card = `
+<tr>
+  <td style="background-color:#0f1018;border:1px solid #1a1b24;border-radius:16px;overflow:hidden;">
+    <div style="height:3px;background:linear-gradient(90deg,#bf5a3a 0%,#4878a8 100%);"></div>
+    <div style="padding:36px 32px 32px;">
+      <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+        <tr>
+          <td align="center" style="padding-bottom:20px;">
+            <div style="display:inline-block;background-color:rgba(72,120,168,0.1);border:1px solid rgba(72,120,168,0.15);border-radius:20px;padding:4px 14px;">
+              <span style="font-size:10px;font-weight:700;color:#4878a8;letter-spacing:0.1em;">${escapeHtml(badge.toUpperCase())}</span>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color:#111219;border:1px solid #16171f;border-radius:12px;">
+        ${rowsHtml}
+      </table>
+    </div>
+  </td>
+</tr>`;
+
+  return wrap(escapeHtml(badge), card);
 }

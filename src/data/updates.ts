@@ -1,4 +1,4 @@
-import { ANDROID_LAUNCH_DATE, APP_STORE_URL, CONTACT_EMAIL, PLAY_STORE_URL } from "../lib/links";
+import { ANDROID_LAUNCH_DATE, APP_STORE_URL, PLAY_STORE_URL } from "../lib/links";
 
 export type UpdateBlock =
   | { type: "text"; text: string }
@@ -35,7 +35,7 @@ function androidLaunchUpdate(date: string): Update {
     blocks: [
       {
         type: "text",
-        text: "It's the question we've been asked more than any other, and today the answer is yes. ToneOut for Android is live on Google Play, and it's a free download right now.\n\nWhat you get today\n\nThe same ToneOut as iPhone, built as a real native Android app — not a port, not a web wrapper. Browse scanner feeds by state. Listen to every ToneOut Network channel from the Glastonbury node, including Glastonbury Police dispatch. Find feeds near you by GPS; your location never leaves your phone. Save your favorites, add your own stream URLs, and keep listening in the background with lock-screen controls. Dark, ad-free, no account, no tracking.\n\nTone Alerts are in from day one: turn on Glastonbury All-Call and your phone gets a push, with the pager warble, the moment the tones drop. All-Call alerts are free. Alerts for your individual company are a separate one-time purchase per town — pay once, no subscription.\n\nDual Listen — two feeds at once, each with its own volume — is a one-time unlock. No subscription.\n\nOne thing to know about Broadcastify feeds: they open in Broadcastify's official player inside the app, the same way they do on iPhone. Broadcastify retired the direct streams apps used to play, and this is the reliable way to keep those feeds available.\n\nHow we got here\n\nGoogle makes new developers prove an app holds up before it's allowed into the public store. ToneOut went through a closed beta and a professional QA pass — 25 Android testers, two weeks, every core flow — and Google approved it for production. The build on the Play Store today is the one that came out of that testing, plus the fixes it turned up.\n\nIf you were on the launch list, the one email we promised is on its way. If something sounds wrong or a feed drops out, tell us on our Facebook page. Those reports drive what gets fixed next.",
+        text: "It's the question we've been asked more than any other, and today the answer is yes. ToneOut for Android is live on Google Play, and it's a free download right now.\n\nWhat you get today\n\nThe same ToneOut as iPhone, built as a real native Android app — not a port, not a web wrapper. Browse scanner feeds by state. Listen to every ToneOut Network channel from the Glastonbury node, including Glastonbury Police dispatch. Find feeds near you by GPS; your location never leaves your phone. Save your favorites, add your own stream URLs, and keep listening in the background with lock-screen controls. Dark, ad-free, no account, no tracking.\n\nTone Alerts are in from day one: turn on Glastonbury All-Call and your phone gets a push, with the pager warble, the moment the tones drop. All-Call alerts are free. Alerts for your individual company are a separate one-time purchase per town — pay once, no subscription.\n\nStandby is in too. If you're listening to music when your department is toned out, your music lowers and the live dispatch channel plays, then your music comes back.\n\nDual Listen — two feeds at once, each with its own volume — is a one-time unlock. No subscription.\n\nOne thing to know about Broadcastify feeds: they open in Broadcastify's official player inside the app, the same way they do on iPhone. Broadcastify retired the direct streams apps used to play, and this is the reliable way to keep those feeds available.\n\nHow we got here\n\nGoogle makes new developers prove an app holds up before it's allowed into the public store. ToneOut went through a closed beta and a professional QA pass — 25 Android testers, two weeks, every core flow — and Google approved it for production. The build on the Play Store today is the one that came out of that testing, plus the fixes it turned up. At launch, ToneOut for Android is available in the United States.\n\nHelp us grow the network\n\nThe ToneOut Network is one node today, in Glastonbury, Connecticut. We're working hard to push it across more towns and more states. If you'd host a node at your firehouse, or at your house if you live close enough to a fire station, a police station, or a radio tower, reach out through the form on our Support page.\n\nIf you were on the launch list, the one email we promised is on its way. If something sounds wrong or a feed drops out, tell us on our Facebook page or send it through Requests and Feedback on our Support page. Those reports drive what gets fixed next.",
       },
       {
         type: "taggedLine",
@@ -52,11 +52,48 @@ function androidLaunchUpdate(date: string): Update {
       label: "Get ToneOut on Google Play",
       href: PLAY_STORE_URL,
       tone: "fire",
+      note: {
+        prefix: "Have a request or something to report? ",
+        linkLabel: "Requests and Feedback",
+        href: "/support#feedback",
+      },
     },
   };
 }
 
 export const updates: Update[] = [
+  ...(ANDROID_LAUNCH_DATE ? [androidLaunchUpdate(ANDROID_LAUNCH_DATE)] : []),
+  {
+    id: "ios-v1-4-standby-and-company-alerts",
+    date: "November 20, 2026",
+    title: "iOS v1.4 Is Live: Standby and Company Alerts",
+    blocks: [
+      {
+        type: "text",
+        text: "Apple approved ToneOut v1.4 and it's on the App Store now. Two new things in it, and both came straight from what firefighters asked for.\n\nStandby\n\nListen to your music and still catch the call. Turn Standby on in the Alerts tab, then start your music. When one of your departments is toned out, your music lowers and the live dispatch channel plays. When it's over, your music comes back.\n\nCompany Alerts\n\nAll-Call alerts tell you when the whole department is toned out. Company Alerts tell you when your specific company is. Glastonbury Company Alerts is the first one: a one-time purchase for the town. Pay once, no subscription. All-Call alerts stay free.\n\nAlso new\n\nTap a tone alert and it takes you straight to Alert History.\n\nSame day, different phone: ToneOut for Android went live on Google Play today too, with Tone Alerts, Company Alerts and Standby in it from day one. That story is in the post above.\n\nIf something sounds wrong or an alert doesn't come through, tell us on our Facebook page or send it through Requests and Feedback on our Support page. Those reports drive what gets fixed next.",
+      },
+      {
+        type: "taggedLine",
+        text: "Company Alerts: a one-time purchase per town, starting with Glastonbury. All-Call alerts stay free. Does not replace your pager.",
+        tag: "LIVE NOW",
+      },
+      {
+        type: "disclaimer",
+        text: "ToneOut is not an emergency service and does not replace your pager or official dispatch. Scanner audio can be delayed. Always call 911 in an emergency.",
+      },
+    ],
+    tag: "new",
+    cta: {
+      label: "Update on the App Store",
+      href: APP_STORE_URL,
+      tone: "fire",
+      note: {
+        prefix: "Have a request or something to report? ",
+        linkLabel: "Requests and Feedback",
+        href: "/support#feedback",
+      },
+    },
+  },
   {
     id: "android-release-in-google-review",
     date: "November 17, 2026",
@@ -90,7 +127,7 @@ export const updates: Update[] = [
     blocks: [
       {
         type: "text",
-        text: "ToneOut's Tone Alerts work because of a small receiver we call a node. It listens for a department's dispatch tones and alerts members' phones seconds later. Right now there is one node, in Glastonbury. We want more.\n\nWhat we're asking\n\nWe're looking for a few fire departments willing to host a node at their station and try Tone Alerts with their members. The node is a small computer with a receive-only radio and an antenna. It needs an outlet and internet. It cannot transmit, and it changes nothing in your paging or dispatch setup.\n\nWhat it costs you\n\nNothing. For the first firehouses, ToneOut covers the node, the install, and managing it. We need your dispatch frequency and tones, a spot to put it, and honest feedback.\n\nWhat it is not\n\nThis is a beta test, and ToneOut is a supplement. It does not replace your pagers, your dispatch, or response apps like IamResponding or First Due. The alert reaches phones a few seconds after the dispatcher finishes the page, so your pager will sound first.\n\nInterested?\n\nEmail " + CONTACT_EMAIL + " with your department and town, and we'll take it from there.",
+        text: "ToneOut's Tone Alerts work because of a small receiver we call a node. It listens for a department's dispatch tones and alerts members' phones seconds later. Right now there is one node, in Glastonbury. We want more.\n\nWhat we're asking\n\nWe're looking for a few fire departments willing to host a node at their station and try Tone Alerts with their members. The node is a small computer with a receive-only radio and an antenna. It needs an outlet and internet. It cannot transmit, and it changes nothing in your paging or dispatch setup.\n\nWhat it costs you\n\nNothing. For the first firehouses, ToneOut covers the node, the install, and managing it. We need your dispatch frequency and tones, a spot to put it, and honest feedback.\n\nWhat it is not\n\nThis is a beta test, and ToneOut is a supplement. It does not replace your pagers, your dispatch, or response apps like IamResponding or First Due. The alert reaches phones a few seconds after the dispatcher finishes the page, so your pager will sound first.\n\nInterested?\n\nFill out the short request form on our support page with your department and town, and we'll take it from there.",
       },
       {
         type: "disclaimer",
@@ -99,8 +136,8 @@ export const updates: Update[] = [
     ],
     tag: "announcement",
     cta: {
-      label: "Email Us About Your Firehouse",
-      href: `mailto:${CONTACT_EMAIL}?subject=ToneOut%20node%20for%20our%20firehouse`,
+      label: "Ask About a Node for Your Firehouse",
+      href: "/support#firehouse",
       tone: "fire",
       note: {
         prefix: "Want the details first? ",
@@ -109,7 +146,6 @@ export const updates: Update[] = [
       },
     },
   },
-  ...(ANDROID_LAUNCH_DATE ? [androidLaunchUpdate(ANDROID_LAUNCH_DATE)] : []),
   {
     id: "glastonbury-pd-and-ios-v1-3-live",
     date: "August 19, 2026",

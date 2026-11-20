@@ -8,6 +8,8 @@
  * @module
  */
 
+import type * as demoRequests from "../demoRequests.js";
+import type * as feedback from "../feedback.js";
 import type * as roadmapIdeas from "../roadmapIdeas.js";
 import type * as waitlist from "../waitlist.js";
 
@@ -18,6 +20,8 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  demoRequests: typeof demoRequests;
+  feedback: typeof feedback;
   roadmapIdeas: typeof roadmapIdeas;
   waitlist: typeof waitlist;
 }>;

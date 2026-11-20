@@ -44,3 +44,8 @@ next-env.d.ts
 /.agents/
 /.claude/
 convex/_generated/ai/
+
+# Android launch email: waitlist export, preview and send log (contain addresses)
+waitlist.jsonl
+android-launch-preview.html
+android-launch-sent.log

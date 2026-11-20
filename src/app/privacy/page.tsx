@@ -48,7 +48,7 @@ export default function PrivacyPolicy() {
             Privacy Policy
           </h1>
           <p className="mb-8 text-xs text-textHint">
-            Last updated: April 13, 2026
+            Last updated: November 20, 2026
           </p>
 
           <div className="text-sm leading-relaxed text-textBody">
@@ -75,6 +75,14 @@ export default function PrivacyPolicy() {
               third parties.
             </P>
             <P>
+              <B>Website Forms:</B>{" "}If you send us a request, feedback, or
+              a firehouse demo request through our website, we collect what
+              you type into the form, such as your message, name, department,
+              town, email, and phone number. We use it only to read and answer
+              your message. It is stored securely and will not be shared with
+              third parties.
+            </P>
+            <P>
               <B>Push to Talk Data:</B>{" "}When Push to Talk features become
               available, contact names and group names you create are stored
               locally on your device. Audio transmitted via Push to Talk is sent
@@ -90,6 +98,20 @@ export default function PrivacyPolicy() {
               <B>Purchase Information:</B>{" "}If you purchase premium features, the
               transaction is handled entirely by Apple. We do not receive or
               store any payment information.
+            </P>
+            <P>
+              <B>Tone Alerts:</B>{" "}If you turn on Tone Alerts, the App sends
+              your device&apos;s push notification token, its platform (iOS or
+              Android), and the departments you subscribed to to ToneOut&apos;s
+              servers so we can deliver alerts. We do not link this to your name
+              or any account. Turn off all Tone Alerts subscriptions or
+              notifications to stop receiving them.
+            </P>
+            <P>
+              <B>Public Radio Content:</B>{" "}Tone alerts, alert history, and
+              dispatch details come from public-safety radio dispatches, which
+              are public information. It is not private information about you. Dispatch
+              details are automated transcriptions and may contain errors.
             </P>
             <P>
               <B>Analytics:</B>{" "}ToneOut does not use third party analytics,
@@ -116,8 +138,17 @@ export default function PrivacyPolicy() {
               >
                 Broadcastify
               </a>
-              {" "}
-              and, in the future, our own ToneOut network. Third party streams
+
+              ,{" "}
+              <a
+                href="https://openmhz.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent hover:text-accent/80"
+              >
+                OpenMHz
+              </a>
+              , and our own ToneOut Network. Third party streams
               are operated by their respective providers. ToneOut has no control
               over their availability, accuracy, or content; those providers
               have their own privacy policies. Push to Talk audio transmission

@@ -1,3 +1,5 @@
+import { ANDROID_LIVE } from "../lib/links";
+
 export type RoadmapStatus = "shipped" | "in-progress" | "next" | "exploring";
 
 export interface RoadmapItem {
@@ -36,6 +38,22 @@ export const STATUS_META: Record<
   },
 };
 
+const ANDROID_ITEM: RoadmapItem = ANDROID_LIVE
+  ? {
+      id: "android-beta",
+      title: "Android on Google Play",
+      description:
+        "ToneOut for Android is live on Google Play — a native Kotlin app with the same scanner feeds, ToneOut Network channels, saved feeds, Tone Alerts, and Dual Listen as iPhone. Free, ad-free, no account.",
+      status: "shipped",
+    }
+  : {
+      id: "android-beta",
+      title: "Android on Google Play",
+      description:
+        "A native Android version of ToneOut, built in Kotlin. The closed beta ran through a professional QA pass and Google has approved ToneOut for the Play Store. The public release is being finalized — join the list on the homepage to get the launch email.",
+      status: "in-progress",
+    };
+
 export const roadmap: RoadmapItem[] = [
   // ── Shipped ──
   {
@@ -50,6 +68,13 @@ export const roadmap: RoadmapItem[] = [
     title: "Broadcastify feeds across 9 states",
     description:
       "A curated library of scanner feeds organized by state — Connecticut, New York, New Jersey, Pennsylvania, Massachusetts, Florida, Illinois, Texas, and California.",
+    status: "shipped",
+  },
+  {
+    id: "openmhz-ios",
+    title: "OpenMHz feeds on iPhone",
+    description:
+      "A second feed source in the iPhone app. OpenMHz plays recorded calls from trunked radio systems moments after they happen, alongside Broadcastify's live streams and the ToneOut Network.",
     status: "shipped",
   },
   {
@@ -70,18 +95,22 @@ export const roadmap: RoadmapItem[] = [
     id: "tone-alerts",
     title: "Tone Alerts",
     description:
-      "A push notification the moment your department is toned out — ToneOut listens to Glastonbury dispatch 24/7 and detects real Quick Call II two-tone pages. All-Call alerts are free; individual company alerts are coming as a subscription. Live on iOS since v1.1, coming to Android right after launch. Does not replace your pager.",
+      `A push notification the moment your department is toned out — ToneOut listens to Glastonbury dispatch 24/7 and detects real Quick Call II two-tone pages. All-Call alerts are free; individual company alerts are ${ANDROID_LIVE ? "a one-time purchase per town, not a subscription" : "coming as a one-time purchase per town, not a subscription"}. ${ANDROID_LIVE ? "Live on iOS and Android." : "Live on iOS since v1.1, and on Android from launch day."} Does not replace your pager.`,
     status: "shipped",
   },
 
-  // ── In Progress ──
   {
-    id: "android-beta",
-    title: "Android on Google Play",
+    id: "standby",
+    title: "Standby",
     description:
-      "A native Android version of ToneOut, built in Kotlin. The closed beta ran through a professional QA pass, the v1.1 build is in Google's review queue, and the application to go public on the Play Store is in Google's hands — join the list on the homepage to get the launch email.",
-    status: "in-progress",
+      "Listen to your music and still catch the call. With Standby on, when one of your departments is toned out your music lowers and the live dispatch channel plays, then your music comes back. Live on iOS since v1.4 and on Android. Does not replace your pager.",
+    status: "shipped",
   },
+
+  ...(ANDROID_LIVE ? [ANDROID_ITEM] : []),
+
+  // ── In Progress ──
+  ...(ANDROID_LIVE ? [] : [ANDROID_ITEM]),
   {
     id: "more-states",
     title: "More states & feeds",
@@ -90,10 +119,17 @@ export const roadmap: RoadmapItem[] = [
     status: "in-progress",
   },
   {
+    id: "openmhz-android",
+    title: "OpenMHz feeds on Android",
+    description:
+      "OpenMHz is in the iPhone app today. We're adding it to ToneOut for Android in a later update.",
+    status: "next",
+  },
+  {
     id: "more-nodes",
     title: "More ToneOut Network nodes",
     description:
-      "Bringing additional nodes online to grow our own independent coverage beyond the first Glastonbury node.",
+      "Today the ToneOut Network is one node in Glastonbury, CT. We're working hard to push it across more towns and states. If you'd host a node at your firehouse, or at your house near a fire station, police station, or radio tower, reach out through the form on our Support page.",
     status: "in-progress",
   },
 
