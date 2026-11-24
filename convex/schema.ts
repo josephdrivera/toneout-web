@@ -211,6 +211,16 @@ export default defineSchema({
     createdAt: v.number(),
   }).index("by_date", ["date", "createdAt"]),
 
+  // Daily app numbers for the admin Stats tab. One row per source per day;
+  // a later report on the same day replaces the earlier one. Counts only:
+  // never device tokens or anything that identifies a person.
+  appStats: defineTable({
+    source: v.string(), // e.g. "main-node"
+    date: v.string(), // YYYY-MM-DD in the source's local time
+    at: v.number(),
+    metrics: v.record(v.string(), v.number()),
+  }).index("by_source_date", ["source", "date"]),
+
   adminLinks: defineTable({
     group: v.string(),
     label: v.string(),

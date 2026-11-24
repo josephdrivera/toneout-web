@@ -3,6 +3,7 @@
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import AudioSettings, { type CaptureSettings } from "./AudioSettings";
+import NetworkLine, { type Station } from "./NetworkLine";
 
 type Health = {
   version?: string;
@@ -239,6 +240,30 @@ export default function NodeDashboard() {
           </div>
         ))}
       </div>
+
+      <NetworkLine
+        now={now}
+        stations={nodes
+          .filter((node) => node.status !== "disabled")
+          .map((node): Station => {
+            const state = nodeState(node, now);
+            return {
+              id: node._id,
+              name: node.name,
+              town: node.town,
+              state: state === "disabled" ? "offline" : state,
+              lastSeenAt: node.lastSeenAt,
+              detail:
+                state === "offline"
+                  ? `Last seen ${ago(node.lastSeenAt, now)}`
+                  : state === "waiting"
+                    ? "Waiting for setup"
+                    : node.health?.channels
+                      ? `${node.health.channels} channels`
+                      : undefined,
+            };
+          })}
+      />
 
       {/* One-time claim code */}
       {claim && (

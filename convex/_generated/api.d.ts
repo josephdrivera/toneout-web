@@ -27,6 +27,7 @@ import type * as projectLog from "../projectLog.js";
 import type * as roadmapIdeas from "../roadmapIdeas.js";
 import type * as seedSources from "../seedSources.js";
 import type * as sources from "../sources.js";
+import type * as stats from "../stats.js";
 import type * as waitlist from "../waitlist.js";
 
 import type {
@@ -55,6 +56,7 @@ declare const fullApi: ApiFromModules<{
   roadmapIdeas: typeof roadmapIdeas;
   seedSources: typeof seedSources;
   sources: typeof sources;
+  stats: typeof stats;
   waitlist: typeof waitlist;
 }>;
 

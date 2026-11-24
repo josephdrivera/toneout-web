@@ -48,6 +48,12 @@ export default function AdminHeader({
           Nodes
         </Link>
         <Link
+          href="/admin/stats"
+          className={tabClass(pathname === "/admin/stats")}
+        >
+          Stats
+        </Link>
+        <Link
           href="/admin/inbox"
           className={tabClass(pathname === "/admin/inbox")}
         >
