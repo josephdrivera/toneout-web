@@ -305,7 +305,7 @@ export default function StatsBoard() {
         <h2 className="mb-1 text-sm font-bold text-textPrimary">App Store</h2>
         <p className="mb-4 text-xs leading-relaxed text-textBody">
           {store.length > 0 && storeFirst
-            ? `From Apple's daily sales reports, which run about a day behind. Newest day: ${shortDate(store[0].date)}. Counting since ${shortDate(storeFirst.date)}, as far back as Apple keeps daily reports.`
+            ? `From Apple's daily sales reports, which run about a day behind. Newest day: ${shortDate(store[0].date)}. Counting since ${shortDate(storeFirst.date)}, the first day Apple shows any activity.`
             : "No App Store reports have been pulled yet."}
         </p>
         {storeSince.length > 0 && (
