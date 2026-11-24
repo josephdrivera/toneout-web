@@ -4,11 +4,19 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 export type TrendDay = { date: string; metrics: Record<string, number> };
 
-const METRICS = [
+export type TrendMetric = {
+  key: string;
+  label: string;
+  noun: string;
+  /** Daily counts (add them up) rather than a running level. */
+  sum?: boolean;
+};
+
+const LEVELS: TrendMetric[] = [
   { key: "subscribers", label: "Subscribers", noun: "tone alert subscribers" },
   { key: "devices", label: "Registered", noun: "phones registered" },
   { key: "active_7d", label: "Active", noun: "phones seen in 7 days" },
-] as const;
+];
 
 const RANGES = [
   { days: 7, label: "7 days" },
@@ -58,10 +66,17 @@ const pill = (active: boolean) =>
       : "border-borderBright text-textBody hover:text-textPrimary"
   }`;
 
-export default function TrendChart({ days }: { days: TrendDay[] }) {
-  const [metric, setMetric] = useState<(typeof METRICS)[number]["key"]>(
-    "subscribers",
-  );
+export default function TrendChart({
+  days,
+  metrics = LEVELS,
+  id = "trend",
+}: {
+  days: TrendDay[];
+  metrics?: TrendMetric[];
+  /** Unique per chart on a page (names the gradient). */
+  id?: string;
+}) {
+  const [metric, setMetric] = useState(metrics[0].key);
   const [range, setRange] = useState<number>(30);
   const [hover, setHover] = useState<number | null>(null);
   const [width, setWidth] = useState(0);
@@ -77,7 +92,7 @@ export default function TrendChart({ days }: { days: TrendDay[] }) {
     return () => observer.disconnect();
   }, []);
 
-  const info = METRICS.find((option) => option.key === metric) ?? METRICS[0];
+  const info = metrics.find((option) => option.key === metric) ?? metrics[0];
 
   const points = useMemo(() => {
     if (days.length === 0) return [];
@@ -99,6 +114,7 @@ export default function TrendChart({ days }: { days: TrendDay[] }) {
   const last = points[points.length - 1];
   const first = points[0];
   const delta = last && first ? last.value - first.value : 0;
+  const total = points.reduce((sum, point) => sum + point.value, 0);
 
   const plot = useMemo(() => {
     if (points.length === 0 || width === 0) return null;
@@ -118,7 +134,9 @@ export default function TrendChart({ days }: { days: TrendDay[] }) {
       PAD.top + innerH - ((value - low) / (high - low || 1)) * innerH;
     const xy = points.map((point) => ({ x: x(point.time), y: y(point.value) }));
     const line = xy
-      .map((p, i) => `${i === 0 ? "M" : "L"}${p.x.toFixed(1)},${p.y.toFixed(1)}`)
+      .map(
+        (p, i) => `${i === 0 ? "M" : "L"}${p.x.toFixed(1)},${p.y.toFixed(1)}`,
+      )
       .join(" ");
     const base = PAD.top + innerH;
     const area =
@@ -134,7 +152,8 @@ export default function TrendChart({ days }: { days: TrendDay[] }) {
     const px = event.clientX - box.left;
     let nearest = 0;
     plot.xy.forEach((p, index) => {
-      if (Math.abs(p.x - px) < Math.abs(plot.xy[nearest].x - px)) nearest = index;
+      if (Math.abs(p.x - px) < Math.abs(plot.xy[nearest].x - px))
+        nearest = index;
     });
     setHover(nearest);
   }
@@ -166,7 +185,7 @@ export default function TrendChart({ days }: { days: TrendDay[] }) {
 
       <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
         <div className="flex flex-wrap gap-1.5">
-          {METRICS.map((option) => (
+          {metrics.map((option) => (
             <button
               key={option.key}
               type="button"
@@ -194,12 +213,23 @@ export default function TrendChart({ days }: { days: TrendDay[] }) {
       <div className="mb-2 flex items-end justify-between gap-3">
         <div>
           <p className="text-[34px] font-extrabold leading-none tracking-[-1px] text-textPrimary">
-            {shown ? shown.value.toLocaleString() : "—"}
+            {!shown
+              ? "—"
+              : (info.sum && active === null
+                  ? total
+                  : shown.value
+                ).toLocaleString()}
           </p>
           <p className="mt-1.5 text-xs text-textBody">
             {info.noun}
             {shown
-              ? ` · ${active !== null ? dateLabel(shown.date, true) : "today"}`
+              ? ` · ${
+                  active !== null
+                    ? dateLabel(shown.date, true)
+                    : info.sum
+                      ? `${dateLabel(first.date)} to ${dateLabel(last.date)}`
+                      : "today"
+                }`
               : ""}
           </p>
         </div>
@@ -212,6 +242,15 @@ export default function TrendChart({ days }: { days: TrendDay[] }) {
                   {(shown.value - previous.value).toLocaleString()}
                 </span>{" "}
                 from the day before
+              </>
+            ) : info.sum ? (
+              <>
+                <span className="font-semibold text-textPrimary">
+                  {(total / points.length).toLocaleString(undefined, {
+                    maximumFractionDigits: 1,
+                  })}
+                </span>{" "}
+                a day on average
               </>
             ) : (
               <>
@@ -236,7 +275,7 @@ export default function TrendChart({ days }: { days: TrendDay[] }) {
             className="block select-none"
           >
             <defs>
-              <linearGradient id="trend-fill" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id={`${id}-fill`} x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="#c89b3c" stopOpacity="0.28" />
                 <stop offset="100%" stopColor="#c89b3c" stopOpacity="0" />
               </linearGradient>
@@ -270,7 +309,8 @@ export default function TrendChart({ days }: { days: TrendDay[] }) {
                 x={plot.xy[index].x}
                 y={HEIGHT - 8}
                 textAnchor={
-                  points.length === 1 || (index > 0 && index < points.length - 1)
+                  points.length === 1 ||
+                  (index > 0 && index < points.length - 1)
                     ? "middle"
                     : index === 0
                       ? "start"
@@ -285,7 +325,11 @@ export default function TrendChart({ days }: { days: TrendDay[] }) {
 
             <g key={`${metric}-${range}-${points.length}`}>
               {plot.area && (
-                <path d={plot.area} fill="url(#trend-fill)" className="trend-area" />
+                <path
+                  d={plot.area}
+                  fill={`url(#${id}-fill)`}
+                  className="trend-area"
+                />
               )}
               {plot.xy.length > 1 && (
                 <path
@@ -313,7 +357,7 @@ export default function TrendChart({ days }: { days: TrendDay[] }) {
               />
             )}
 
-            {active === null && (
+            {active === null && !info.sum && (
               <circle
                 cx={plot.xy[plot.xy.length - 1].x}
                 cy={plot.xy[plot.xy.length - 1].y}

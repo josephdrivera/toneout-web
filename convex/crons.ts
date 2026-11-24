@@ -10,4 +10,13 @@ crons.interval(
   {},
 );
 
+// Apple posts yesterday's sales report during the morning (US time); the
+// second run catches late reports and corrections.
+crons.cron(
+  "pull App Store stats",
+  "20 14,22 * * *",
+  internal.appStore.pull,
+  {},
+);
+
 export default crons;

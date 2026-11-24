@@ -2,10 +2,16 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import TrendChart from "./TrendChart";
+import TrendChart, { type TrendMetric } from "./TrendChart";
+
+const APP_STORE_METRICS: TrendMetric[] = [
+  { key: "downloads", label: "Downloads", noun: "new downloads", sum: true },
+  { key: "purchases", label: "Purchases", noun: "purchases", sum: true },
+  { key: "updates", label: "Updates", noun: "app updates", sum: true },
+];
 
 type Day = { date: string; at: number; metrics: Record<string, number> };
-type StatsData = { now: number; days: Day[] };
+type StatsData = { now: number; days: Day[]; appStore?: Day[] };
 
 const DEPT_PREFIX = "dept:";
 
@@ -39,7 +45,8 @@ function ago(timestamp: number, now: number): string {
 /** Change against the closest report at least `daysBack` days older. */
 function change(days: Day[], key: string, daysBack: number): number | null {
   const latest = days[0];
-  const cutoff = new Date(`${latest.date}T00:00:00Z`).getTime() - daysBack * 86400000;
+  const cutoff =
+    new Date(`${latest.date}T00:00:00Z`).getTime() - daysBack * 86400000;
   const earlier = days.find(
     (day) => new Date(`${day.date}T00:00:00Z`).getTime() <= cutoff,
   );
@@ -129,6 +136,27 @@ export default function StatsBoard() {
     .sort((a, b) => b.count - a.count || a.id.localeCompare(b.id));
   const topDepartment = Math.max(1, ...departments.map((dept) => dept.count));
   const history = showAllDays ? data.days : data.days.slice(0, 14);
+
+  // App Store rows are one per day; totals are sums since the first activity.
+  const store = data.appStore ?? [];
+  const storeActive = store.filter((day) =>
+    Object.values(day.metrics).some((value) => value !== 0),
+  );
+  const storeFirst = storeActive[storeActive.length - 1];
+  const storeSince = storeFirst
+    ? store.filter((day) => day.date >= storeFirst.date)
+    : [];
+  const storeSum = (key: string, rows: Day[] = storeSince) =>
+    rows.reduce((sum, day) => sum + (day.metrics[key] ?? 0), 0);
+  const storeWeek = store.slice(0, 7);
+  const storeProducts = Object.entries(
+    storeSince.reduce<Record<string, number>>((all, day) => {
+      for (const [key, value] of Object.entries(day.metrics)) {
+        if (key.startsWith("iap:")) all[key] = (all[key] ?? 0) + value;
+      }
+      return all;
+    }, {}),
+  ).sort((a, b) => b[1] - a[1]);
 
   return (
     <div className="space-y-10">
@@ -222,7 +250,9 @@ export default function StatsBoard() {
 
       {data.days.length > 0 && (
         <section>
-          <h2 className="mb-4 text-sm font-bold text-textPrimary">Day by day</h2>
+          <h2 className="mb-4 text-sm font-bold text-textPrimary">
+            Day by day
+          </h2>
           <div className="overflow-x-auto rounded-xl border border-border bg-surface">
             <table className="w-full text-left text-xs">
               <thead>
@@ -272,13 +302,69 @@ export default function StatsBoard() {
       )}
 
       <section>
-        <h2 className="mb-1 text-sm font-bold text-textPrimary">
-          Store numbers
-        </h2>
+        <h2 className="mb-1 text-sm font-bold text-textPrimary">App Store</h2>
+        <p className="mb-4 text-xs leading-relaxed text-textBody">
+          {store.length > 0 && storeFirst
+            ? `From Apple's daily sales reports, which run about a day behind. Newest day: ${shortDate(store[0].date)}. Counting since ${shortDate(storeFirst.date)}, as far back as Apple keeps daily reports.`
+            : "No App Store reports have been pulled yet."}
+        </p>
+        {storeSince.length > 0 && (
+          <>
+            <div className="mb-3">
+              <TrendChart
+                days={storeSince}
+                metrics={APP_STORE_METRICS}
+                id="appstore"
+              />
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Tile
+                label="iPhone and iPad downloads"
+                value={storeSum("downloads")}
+                detail={`${storeSum("downloads_iphone")} iPhone · ${storeSum("downloads_ipad")} iPad · ${storeSum("downloads", storeWeek)} in the last 7 days`}
+              />
+              <Tile
+                label="Purchases"
+                value={storeSum("purchases")}
+                detail={`$${storeSum("proceeds_usd").toFixed(2)} in proceeds after Apple's cut${
+                  storeSum("refunds") > 0
+                    ? ` · ${storeSum("refunds")} refunded`
+                    : ""
+                }`}
+              />
+            </div>
+            {storeProducts.length > 0 && (
+              <div className="mt-3 rounded-xl border border-border bg-surface">
+                {storeProducts.map(([key, count], index) => (
+                  <div
+                    key={key}
+                    className={`flex items-center justify-between gap-3 px-5 py-2.5 ${
+                      index > 0 ? "border-t border-border" : ""
+                    }`}
+                  >
+                    <span className="min-w-0 truncate text-xs text-textSecondary">
+                      {key.slice(4)}
+                    </span>
+                    <span className="shrink-0 text-xs font-semibold text-textPrimary">
+                      {count}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+            <p className="mt-3 text-[11px] leading-relaxed text-textMuted">
+              Downloads are first-time installs. Re-downloads and updates are
+              not included in that number.
+            </p>
+          </>
+        )}
+      </section>
+
+      <section>
+        <h2 className="mb-1 text-sm font-bold text-textPrimary">Google Play</h2>
         <p className="rounded-xl border border-border bg-surface px-5 py-4 text-xs leading-relaxed text-textBody">
-          App Store downloads, Google Play installs and Company Alerts
-          purchases are not connected yet. Each needs a read-only reporting key
-          from the store account.
+          Not connected yet. The read-only reporting account is set up; Google
+          can take about a day to open the report files to it.
         </p>
       </section>
     </div>

@@ -20,15 +20,15 @@ export async function GET() {
     source: "main-node",
     days: 90,
   });
+  const appStore = await convex.query(api.stats.list, {
+    secret,
+    source: "app-store",
+    days: 400,
+  });
+  const slim = (rows: typeof days) =>
+    rows.map((row) => ({ date: row.date, at: row.at, metrics: row.metrics }));
   return NextResponse.json(
-    {
-      now: Date.now(),
-      days: days.map((row) => ({
-        date: row.date,
-        at: row.at,
-        metrics: row.metrics,
-      })),
-    },
+    { now: Date.now(), days: slim(days), appStore: slim(appStore) },
     { headers: { "Cache-Control": "no-store" } },
   );
 }

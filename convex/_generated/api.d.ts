@@ -10,6 +10,7 @@
 
 import type * as admins from "../admins.js";
 import type * as alerts from "../alerts.js";
+import type * as appStore from "../appStore.js";
 import type * as crons from "../crons.js";
 import type * as demoRequests from "../demoRequests.js";
 import type * as feedback from "../feedback.js";
@@ -39,6 +40,7 @@ import type {
 declare const fullApi: ApiFromModules<{
   admins: typeof admins;
   alerts: typeof alerts;
+  appStore: typeof appStore;
   crons: typeof crons;
   demoRequests: typeof demoRequests;
   feedback: typeof feedback;
