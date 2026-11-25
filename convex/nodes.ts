@@ -45,6 +45,23 @@ const captureValidator = v.object({
 
 const MAX_EVENTS_PER_NODE = 20;
 
+const SERIAL_PREFIX = { "line-in": "AO", sdr: "SD" } as const;
+
+/** Highest number already used for each serial prefix. */
+function serialCounters(nodes: Array<{ serial?: string }>) {
+  const highest: Record<string, number> = {};
+  for (const node of nodes) {
+    const match = /^([A-Z]{2})-(\d+)$/.exec(node.serial ?? "");
+    if (!match) continue;
+    highest[match[1]] = Math.max(highest[match[1]] ?? 0, Number(match[2]));
+  }
+  return highest;
+}
+
+function formatSerial(prefix: string, number: number) {
+  return `${prefix}-${String(number).padStart(4, "0")}`;
+}
+
 export const adminOverview = query({
   args: { secret: v.string() },
   handler: async (ctx, args) => {
@@ -68,6 +85,8 @@ export const adminOverview = query({
       nodeRows.push({
         _id: node._id,
         name: node.name,
+        serial: node.serial,
+        hostLabel: node.hostLabel,
         town: node.town,
         hostName: node.hostName,
         inputType: node.inputType,
@@ -136,8 +155,16 @@ export const create = mutation({
     if (!name || !town) return null;
     const hostName = args.hostName?.trim();
     const notes = args.notes?.trim();
+    // Serials are never reused: the next number after the highest ever given.
+    const prefix = SERIAL_PREFIX[args.inputType];
+    const existing = await ctx.db.query("nodes").take(1000);
+    const serial = formatSerial(
+      prefix,
+      (serialCounters(existing)[prefix] ?? 0) + 1,
+    );
     const nodeId = await ctx.db.insert("nodes", {
       name,
+      serial,
       town,
       ...(hostName ? { hostName } : {}),
       inputType: args.inputType,
@@ -436,6 +463,8 @@ export const checkin = mutation({
     secret: v.string(),
     keyHash: v.string(),
     health: healthValidator,
+    // The name the host typed on the node's setup page, if any.
+    hostLabel: v.optional(v.string()),
   },
   returns: v.object({
     result: v.union(
@@ -461,6 +490,18 @@ export const checkin = mutation({
       !node.lastSeenAt || now - node.lastSeenAt > 5 * 60 * 1000;
     await ctx.db.patch(node._id, { lastSeenAt: now, health: args.health });
 
+    // The host renamed the node. Our own name and serial stay as they are.
+    const hostLabel = args.hostLabel?.trim().slice(0, 40);
+    if (hostLabel && hostLabel !== node.hostLabel) {
+      await ctx.db.patch(node._id, { hostLabel });
+      await ctx.db.insert("nodeEvents", {
+        nodeId: node._id,
+        at: now,
+        type: "renamed by host",
+        detail: hostLabel,
+      });
+    }
+
     if (wasOffline) {
       await ctx.db.insert("nodeEvents", {
         nodeId: node._id,
@@ -478,5 +519,30 @@ export const checkin = mutation({
       }
     }
     return { result: "ok" as const, configVersion: node.configVersion ?? 0 };
+  },
+});
+
+/**
+ * One-off: gives a serial to nodes created before serials existed, oldest
+ * first. Safe to run again; nodes that have one are left alone.
+ */
+export const backfillSerials = mutation({
+  args: { secret: v.string() },
+  returns: v.number(),
+  handler: async (ctx, args) => {
+    assertEditorSecret(args.secret);
+    const nodes = await ctx.db.query("nodes").take(1000);
+    const highest = serialCounters(nodes);
+    const missing = nodes
+      .filter((node) => !node.serial)
+      .sort((a, b) => a.createdAt - b.createdAt);
+    for (const node of missing) {
+      const prefix = SERIAL_PREFIX[node.inputType];
+      highest[prefix] = (highest[prefix] ?? 0) + 1;
+      await ctx.db.patch(node._id, {
+        serial: formatSerial(prefix, highest[prefix]),
+      });
+    }
+    return missing.length;
   },
 });

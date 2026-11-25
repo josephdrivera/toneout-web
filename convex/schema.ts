@@ -133,6 +133,11 @@ export default defineSchema({
     name: v.string(),
     town: v.string(),
     hostName: v.optional(v.string()),
+    // Our permanent number for the unit (AO-0001 audio only, SD-0001 radio
+    // dongle). Never changes, whatever the host calls the node.
+    serial: v.optional(v.string()),
+    // The name the host gave the node on its setup page; sent by the node.
+    hostLabel: v.optional(v.string()),
     inputType: v.union(v.literal("sdr"), v.literal("line-in")),
     // pending = waiting for its claim code to be used; active = licensed;
     // disabled = license revoked (heartbeats are refused).

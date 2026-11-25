@@ -20,6 +20,8 @@ type Health = {
 type NodeRow = {
   _id: string;
   name: string;
+  serial?: string;
+  hostLabel?: string;
   town: string;
   hostName?: string;
   inputType: "sdr" | "line-in";
@@ -430,7 +432,20 @@ export default function NodeDashboard() {
                   <div className="min-w-0">
                     <h3 className="truncate text-base font-bold text-textPrimary">
                       {node.name}
+                      {node.serial ? (
+                        <span className="ml-2 font-mono text-xs font-semibold text-textMuted">
+                          {node.serial}
+                        </span>
+                      ) : null}
                     </h3>
+                    {node.hostLabel ? (
+                      <p className="truncate text-xs text-textBody">
+                        Host calls it{" "}
+                        <span className="font-semibold text-textPrimary">
+                          {node.hostLabel}
+                        </span>
+                      </p>
+                    ) : null}
                     <p className="text-xs text-textBody">
                       {node.town}
                       {node.hostName ? ` · ${node.hostName}` : ""} ·{" "}
